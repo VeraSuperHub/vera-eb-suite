@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NIW_Evaluate_Result",
+  "description": "Output contract for NIW_Evaluate skill. Consumed by NIW_Endeavor and NIW_Assemble.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "applicant",
+    "pathway",
+    "field_alignment_tier",
+    "verdict",
+    "strengths",
+    "gaps",
+    "evidence_inventory",
+    "recommended_pillars_preview",
+    "evaluator_notes"
+  ],
+  "properties": {
+    "applicant": {
+      "type": "object",
+      "required": ["name", "pronoun", "degree", "field", "university", "year_degree", "years_experience"],
+      "properties": {
+        "name":             { "type": "string" },
+        "pronoun":          { "type": "string", "examples": ["she/her", "he/him", "they/them"] },
+        "degree":           { "type": "string", "examples": ["PhD", "Master of Science", "Bachelor of Science"] },
+        "field":            { "type": "string" },
+        "university":       { "type": "string" },
+        "year_degree":      { "type": "string" },
+        "years_experience": { "type": "integer" },
+        "current_title":    { "type": "string" },
+        "current_employer": { "type": "string" }
+      }
+    },
+    "pathway": {
+      "type": "string",
+      "enum": ["A", "B", "C", "None"],
+      "description": "A=Academic, B=Professional/Industry, C=Mixed/Hybrid, None=Does not qualify on any pathway"
+    },
+    "field_alignment_tier": {
+      "type": "string",
+      "enum": ["1", "2", "3", "None"],
+      "description": "1=NSTC priority area, 2=Recognized national interest, 3=Hard to justify, None=No alignment found"
+    },
+    "application_domain": {
+      "type": "string",
+      "description": "The actual domain of national importance, stripped of technology labels (e.g. 'public health surveillance' not 'AI')"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["QUALIFIED", "LIKELY_QUALIFIED", "BORDERLINE", "NOT_QUALIFIED"]
+    },
+    "strengths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["description", "evidence_reference"],
+        "properties": {
+          "description":        { "type": "string" },
+          "evidence_reference": { "type": "string" }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["criterion", "current_state", "required_state", "evidence_score", "how_to_address", "blocking"],
+        "properties": {
+          "criterion":      { "type": "string" },
+          "current_state":  { "type": "string" },
+          "required_state": { "type": "string" },
+          "evidence_score": { "type": "integer", "minimum": 0, "maximum": 3 },
+          "how_to_address": { "type": "string" },
+          "blocking": {
+            "type": "boolean",
+            "description": "True if this gap prevents proceeding to NIW_Endeavor"
+          }
+        }
+      }
+    },
+    "evidence_inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "objective_evidence", "subjective_evidence", "score"],
+        "properties": {
+          "claim":               { "type": "string" },
+          "objective_evidence":  { "type": "array", "items": { "type": "string" } },
+          "subjective_evidence": { "type": "array", "items": { "type": "string" } },
+          "score":               { "type": "integer", "minimum": 0, "maximum": 3 },
+          "notes":               { "type": "string" }
+        }
+      }
+    },
+    "academic_metrics": {
+      "type": "object",
+      "description": "Populated only for Pathway A or C",
+      "properties": {
+        "publication_count":   { "type": "integer" },
+        "journal_count":       { "type": "integer" },
+        "conference_count":    { "type": "integer" },
+        "first_authored":      { "type": "integer" },
+        "citation_count":      { "type": "integer" },
+        "h_index":             { "type": "integer" },
+        "peer_review_count":   { "type": "integer" },
+        "top_venue_papers":    { "type": "array", "items": { "type": "string" } },
+        "citation_source":     { "type": "string", "examples": ["Google Scholar", "Semantic Scholar", "Scopus"] }
+      }
+    },
+    "recommended_pillars_preview": {
+      "type": "array",
+      "description": "2-4 high-level themes that could become NIW pillars. Feeds NIW_Endeavor.",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["title", "rationale"],
+        "properties": {
+          "title":     { "type": "string", "description": "Short pillar title (5-10 words)" },
+          "rationale": { "type": "string", "description": "1-2 sentences on why this works as a NIW pillar" }
+        }
+      }
+    },
+    "conditions_to_proceed": {
+      "type": "array",
+      "description": "For LIKELY_QUALIFIED or BORDERLINE: specific conditions that must be met before filing",
+      "items": { "type": "string" }
+    },
+    "field_alignment_notes": {
+      "type": "string",
+      "description": "Explanation of domain identification and tier assignment, especially if AI/tech labels were present"
+    },
+    "evaluator_notes": {
+      "type": "string",
+      "description": "Honest narrative summary. Flags thin areas, reframing risks, or anything that needs attention."
+    }
+  }
+}

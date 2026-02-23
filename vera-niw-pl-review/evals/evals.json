@@ -1,0 +1,121 @@
+{
+  "skill_name": "vera-niw-pl-review",
+  "evals": [
+    {
+      "id": 1,
+      "name": "vague-endeavor-software-engineer",
+      "prompt": "Review this petition letter excerpt:\n\nMy proposed endeavor is to work as a software engineer specializing in payment security and fraud prevention. The field of cybersecurity is critically important to the United States, as cyberattacks cost the U.S. economy over $8 trillion annually. I have worked for five years building secure payment systems and I intend to continue this important work in the United States. I hold a Master's degree in Computer Science and have deep expertise in payment protocols, encryption, and fraud detection algorithms.",
+      "expected_output": "Officer review flags (1) occupation-as-endeavor: 'work as a software engineer' is a job function, not an undertaking; (2) field importance fallacy: '$8 trillion' cited for the field, not the petitioner's specific contribution; (3) no named specific project or tool; (4) Prong 1 rated DEFICIENT, HIGH risk; rewrite guidance proposes a named, bounded endeavor with a specific measurable outcome.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains",
+          "value": "occupation",
+          "description": "Flags occupation-as-endeavor pattern"
+        },
+        {
+          "type": "contains",
+          "value": "field",
+          "description": "Flags field importance fallacy"
+        },
+        {
+          "type": "contains",
+          "value": "HIGH",
+          "description": "Assigns HIGH risk to Prong 1"
+        },
+        {
+          "type": "contains",
+          "value": "REWRITE GUIDANCE",
+          "description": "Provides rewrite guidance section"
+        },
+        {
+          "type": "contains",
+          "value": "DEFICIENT",
+          "description": "Rates Prong 1 as DEFICIENT"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "weak-recommendation-letter-non-independent",
+      "prompt": "Review this recommendation letter excerpt:\n\nI am writing to express my strong support for Dr. Jane Smith's NIW petition. I am Dr. John Doe, Professor at MIT, and I have had the pleasure of working with Jane for the past three years on a joint research project. Jane is an extraordinary researcher with exceptional skills in machine learning. Her work on fraud detection is innovative and has significant implications for the field. I believe Jane is one of the top researchers I have encountered in my career and I strongly recommend her for this petition.",
+      "expected_output": "Officer review flags (1) recommender is not independent — worked with petitioner for 3 years on joint project; (2) generic superlatives without before/after framing; (3) no specific method, publication, or tool named; (4) no evidence recommender used or built upon petitioner's work; RL rated DEFICIENT, HIGH risk; rewrite guidance requests independence statement and specific prior-art comparison.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains",
+          "value": "independent",
+          "description": "Flags non-independence of recommender"
+        },
+        {
+          "type": "contains",
+          "value": "before",
+          "description": "Flags absence of before/after framing"
+        },
+        {
+          "type": "contains",
+          "value": "HIGH",
+          "description": "Assigns HIGH risk to RL assessment"
+        },
+        {
+          "type": "contains",
+          "value": "superlative",
+          "description": "Flags generic superlatives without substantiation"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "strong-petition-minimal-issues",
+      "prompt": "Review this petition letter excerpt:\n\nMy proposed endeavor is to develop and deploy the Temporal Graph Anomaly Detection Framework (TGADF) — a novel machine learning architecture I designed that identifies coordinated fraud networks in real-time payment systems by modeling transaction relationships as dynamic graphs rather than independent events. This approach directly addresses a $42 billion annual loss gap identified in the Federal Reserve's 2023 Payments Security Report (Exhibit C-1), where existing rule-based systems miss 23% of coordinated fraud patterns. I have already published three peer-reviewed papers on TGADF (Exhibits D-1, D-2, D-3), two fintech companies have licensed the approach (Exhibit D-5), and I have presented the framework at the IEEE Financial Technology Security Symposium at the invitation of the program committee (Exhibit D-4). My plan in the United States is to partner with the Federal Reserve's FedNow initiative to harden the real-time payments infrastructure serving 10,000+ financial institutions.",
+      "expected_output": "Officer review recognizes (1) named, specific, bounded endeavor (TGADF); (2) national importance anchored to Federal Reserve report and FedNow initiative — not generic field importance; (3) existing third-party interest (two licensees); (4) publication record with Exhibit references. Overall risk rated LOW or MEDIUM. Any remaining gaps identified without inventing problems.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "not_contains",
+          "value": "DEFICIENT",
+          "description": "Does not rate any prong as DEFICIENT for a strong petition"
+        },
+        {
+          "type": "regex",
+          "value": "LOW|MEDIUM",
+          "description": "Overall RFE risk is LOW or MEDIUM"
+        },
+        {
+          "type": "contains",
+          "value": "TGADF",
+          "description": "Recognizes the specific named endeavor"
+        },
+        {
+          "type": "contains",
+          "value": "FedNow",
+          "description": "Recognizes national importance anchor"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "rfe-response-petition-letter",
+      "prompt": "I received an RFE on my NIW petition. USCIS said my endeavor is too vague and my Prong 1 is deficient. Here is my updated petition letter section:\n\nMy proposed endeavor is to build and deploy MedNLP-Verify, an open-source clinical NLP pipeline that automatically detects and flags medication errors in electronic health records (EHRs) at U.S. hospital systems. The system applies transformer-based named entity recognition to identify discrepancies between prescribed medications and documented administration events — a gap responsible for approximately 1.5 million preventable medication errors annually in the U.S. (Institute of Medicine, 2006; updated HHS 2022 estimate, Exhibit A-3). MedNLP-Verify is currently in pilot deployment at two hospital systems and has been adopted by the ONC's FHIR interoperability working group as a reference implementation (Exhibit A-5).",
+      "expected_output": "Officer review recognizes named endeavor (MedNLP-Verify), specific technical method (transformer-based NER), quantified national gap (1.5M errors/year with cited exhibits), and third-party adoption (ONC working group). Prong 1 rated BORDERLINE or ADEQUATE. Any remaining gaps identified — e.g., whether Prong 3 waiver argument is present — without over-flagging strong elements.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "not_contains",
+          "value": "occupation",
+          "description": "Does not incorrectly flag the named endeavor as occupation-as-endeavor"
+        },
+        {
+          "type": "contains",
+          "value": "MedNLP-Verify",
+          "description": "Recognizes specific named endeavor"
+        },
+        {
+          "type": "regex",
+          "value": "BORDERLINE|ADEQUATE",
+          "description": "Prong 1 rated BORDERLINE or ADEQUATE"
+        }
+      ]
+    }
+  ]
+}
