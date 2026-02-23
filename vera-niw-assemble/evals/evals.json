@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "description": "Full pipeline — all inputs provided including GS data. Tests complete assembly into .docx with exhibit index.",
+    "prompt": "Assemble my NIW petition. Here are all my inputs:\n\nEVALUATE JSON:\n{\"applicant\":{\"name\":\"Dr. Amara Osei\",\"pronoun\":\"she/her\",\"degree\":\"PhD\",\"field\":\"Epidemiology\",\"university\":\"Johns Hopkins\",\"year_degree\":\"2019\",\"years_experience\":5,\"current_title\":\"Research Scientist\",\"current_employer\":\"CDC contractor\"},\"pathway\":\"A\",\"verdict\":\"QUALIFIED\",\"academic_metrics\":{\"publication_count\":6,\"first_authored\":3,\"citation_count\":89,\"h_index\":6,\"peer_review_count\":11}}\n\nENDEAVOR: Dr. Osei proposes to advance national pandemic surveillance by developing and deploying ML-based wastewater epidemiology tools for early outbreak detection across U.S. public health systems. [Full endeavor statement + 3 pillar titles provided]\n\nPILLAR 1 PROSE: [Full Section 1-5 prose for Pillar 1 — Wastewater ML Methodology]\nPILLAR 2 PROSE: [Full Section 1-5 prose for Pillar 2 — State Health System Integration]\nPILLAR 3 PROSE: [Full Section 1-5 prose for Pillar 3 — Federal Policy Translation]\n\nGS JSON: {\"total_citations\":89,\"h_index\":6,\"i10_index\":4,\"papers\":[{\"title\":\"ML-based wastewater surveillance\",\"venue\":\"Emerging Infectious Diseases\",\"year\":2022,\"citation_count\":34,\"is_first_authored\":true,\"indexed_in\":[\"PubMed\",\"Scopus\"]}]}\n\nGS CSV: title,venue,year,citation_count,is_first_authored\nML-based wastewater surveillance,Emerging Infectious Diseases,2022,34,true",
+    "expected_output": "Complete .docx file with all 9 sections, publications table with PubMed/Scopus-indexed papers, exhibit index with sequential numbering, Dhanasar citation in prayer for relief.",
+    "assertions": [
+      "docx file generated and validated",
+      "All 9 sections present in correct order",
+      "Publications table present with venue and citation columns",
+      "Exhibit index table present with sequential numbering",
+      "Prayer for Relief cites Dhanasar 26 I&N Dec. 884",
+      "Unified Prong 3 does not copy pillar Prong 3 prose verbatim",
+      "No [GS_DATA_NEEDED] placeholders — GS data was provided",
+      "No hedging language (no 'may', 'might', 'could potentially') in generated sections"
+    ],
+    "files": []
+  },
+  {
+    "id": 2,
+    "description": "GS data missing — tests placeholder mode. All other inputs provided. Skill should assemble with [GS_DATA_NEEDED] tags rather than blocking.",
+    "prompt": "Assemble my NIW petition. I have everything except Google Scholar data — can you build it with placeholders for now?\n\nEVALUATE JSON: {\"applicant\":{\"name\":\"Dr. Ravi Mehta\",\"pronoun\":\"he/him\",\"degree\":\"PhD\",\"field\":\"Computer Science\",\"university\":\"CMU\",\"year_degree\":\"2020\",\"current_title\":\"Research Engineer\",\"current_employer\":\"DARPA contractor\"},\"pathway\":\"A\",\"verdict\":\"QUALIFIED\",\"academic_metrics\":{\"publication_count\":8,\"first_authored\":4,\"citation_count\":112,\"h_index\":7}}\n\nENDEAVOR + PILLARS: [provided]\nPILLAR 1-3 PROSE: [provided]\nGS DATA: NOT PROVIDED",
+    "expected_output": "Complete .docx with [GS_DATA_NEEDED: total_citations] and [GS_DATA_NEEDED: publications_table] placeholders in Section III. All other 8 sections fully assembled. Skill does not block or refuse.",
+    "assertions": [
+      "docx file generated despite missing GS data",
+      "Section III contains [GS_DATA_NEEDED] placeholders clearly labeled",
+      "Sections I, II, IV-IX fully populated",
+      "Post-assembly check flags GS placeholders as items to complete before filing",
+      "Skill does not ask user to provide GS data before proceeding"
+    ],
+    "files": []
+  },
+  {
+    "id": 3,
+    "description": "Pattern D trigger — GS data includes a paper in an unverified journal. Tests that skill flags it rather than silently including it.",
+    "prompt": "Assemble my petition. GS data includes one paper in a journal I'm not sure is indexed.\n\nGS JSON partial: {\"papers\":[{\"title\":\"Analysis of drug interactions\",\"venue\":\"International Journal of Advanced Research\",\"year\":2021,\"citation_count\":8,\"is_first_authored\":true,\"indexed_in\":[]}]}",
+    "expected_output": "Credentials section includes the paper but with an inline [NOTE: 'International Journal of Advanced Research' — indexing status unconfirmed...] flag. Paper is not silently omitted or silently included without the warning.",
+    "assertions": [
+      "Paper appears in publications table",
+      "Inline NOTE flag present for unverified journal",
+      "NOTE instructs petitioner to verify against ISI/Scopus/PubMed before filing",
+      "Skill does not refuse to include the paper — it flags and continues"
+    ],
+    "files": []
+  }
+]
