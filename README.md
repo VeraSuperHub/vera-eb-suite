@@ -11,25 +11,25 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 ## The Pipeline
 
 ```
-  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-  │  1. EVALUATE │────▶│ 2. ENDEAVOR │────▶│  3. PILLAR   │
+  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+  │  1. EVALUATE │────▶│ 2. ENDEAVOR  │────▶│  3. PILLAR   │
   │  Go/no-go    │     │  Endeavor    │     │  ×3 runs     │
   │  assessment  │     │  statement   │     │  (one per    │
   │              │     │  + 3 pillar  │     │   pillar)    │
-  └─────────────┘     │  seeds       │     └──────┬───────┘
-                      └─────────────┘            │
-                                                  ▼
-  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-  │ 7. RFE      │     │ 6. PL       │◀────│ 5. ASSEMBLE │
+  └──────────────┘     │  seeds       │     └──────┬───────┘
+                       └──────────────┘            │
+                                                   ▼
+  ┌─────────────┐     ┌─────────────┐     ┌──────────────┐
+  │ 7. RFE      │     │ 6. PL       │◀────│ 5. ASSEMBLE  │
   │ RESPONSE    │     │ REVIEW      │     │  Full .docx  │
   │ (if needed) │     │ Adversarial │     │  petition    │
   └─────────────┘     │ QA gate     │     └──────┬───────┘
                       └─────────────┘            │
-                            ▲              ┌─────┴───────┐
+                            ▲              ┌─────┴────────┐
                             └──────────────│ 4. RECOMMEND │
                                            │  Reference   │
                                            │  letters     │
-                                           └─────────────┘
+                                           └──────────────┘
 ```
 
 ---
@@ -57,18 +57,25 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 
 ### Installation
 
-**Option A — Claude Project (recommended):**
+**Requirements:**
+- [Claude Pro, Max, Team, or Enterprise](https://claude.ai/upgrade) subscription
+- Code execution enabled (Settings → Capabilities)
 
-1. Create a new Project in Claude
-2. Copy the contents of `SKILL.md` for the skill you need into the Project's custom instructions
-3. Add any files from the skill's `references/`, `rubric/`, or `examples/` folder as Project knowledge
-4. Start chatting
+**Step 1 — Download the skill**
 
-**Option B — Direct paste:**
+Download the ZIP file for the skill you want from this repo (each skill folder is a standalone package).
 
-1. Copy the contents of `SKILL.md`
-2. Paste it at the beginning of a new Claude conversation
-3. Follow with your request
+**Step 2 — Upload to Claude**
+
+1. Go to [Settings → Capabilities](https://claude.ai/settings/capabilities)
+2. Scroll to the **Skills** section
+3. Click **"Upload skill"**
+4. Upload the skill's ZIP file
+5. Toggle the skill **on**
+
+That's it. Claude will automatically invoke the skill when your request matches its description — no manual activation needed. You'll see the skill appear in Claude's chain of thought as it works.
+
+**Install one skill at a time.** Each skill is a separate ZIP upload. For the full pipeline, install all 7.
 
 ### Recommended Workflow
 
@@ -237,20 +244,3 @@ These tools are for **informational and educational purposes only**. They do not
 
 MIT License. See [LICENSE](LICENSE).
 
----
-
-## Author
-
-Built by **Elivia Dobby** — PhD researcher, statistician, and builder of AI-powered expertise tools.
-
-- Website: [eliviadobby.com](https://eliviadobby.com)
-- GitHub: [@eliviadobby](https://github.com/eliviadobby)
-- Email: Veronica.Liu0206@gmail.com
-
-*Scaling expertise into code.*
-
----
-
-## Need Help?
-
-If you've used these skills and need expert guidance on your specific case — strategy review, petition optimization, or RFE response planning — [book a consultation](https://eliviadobby.com/consult).
