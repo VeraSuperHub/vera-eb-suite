@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Route A — Has NIW_Evaluate output, fast-track via pillar previews",
+    "description": "User provides NIW_Evaluate JSON with QUALIFIED verdict and pillar previews. Skill should extract seeds, skip to ingredient refinement, and produce a polished endeavor statement without a full interview from scratch.",
+    "prompt": "I just completed NIW_Evaluate and got QUALIFIED. Here's my output:\n\n{\n  \"applicant\": { \"name\": \"Dr. Mei Lin\", \"pronoun\": \"she/her\", \"degree\": \"PhD\", \"field\": \"Computational Epidemiology\", \"years_experience\": 5 },\n  \"pathway\": \"A\",\n  \"field_alignment_tier\": \"1\",\n  \"application_domain\": \"Public health surveillance and pandemic preparedness\",\n  \"verdict\": \"QUALIFIED\",\n  \"recommended_pillars_preview\": [\n    { \"title\": \"Real-Time Wastewater Surveillance for Early Outbreak Detection\", \"rationale\": \"Her ML model for SARS-CoV-2 detection in wastewater is adopted by 9 state health departments and referenced in CDC guidance.\" },\n    { \"title\": \"Scalable Epidemiological Signal Detection Infrastructure\", \"rationale\": \"The system architecture is portable across pathogens and jurisdictions — strong replicability argument.\" },\n    { \"title\": \"Open-Source Public Health Monitoring Tools for Under-Resourced Agencies\", \"rationale\": \"Open-source release enables adoption by smaller agencies that lack proprietary tools — equity and access angle.\" }\n  ],\n  \"evaluator_notes\": \"Strong case. CDC adoption is rare and highly persuasive. Proceed to NIW_Endeavor.\"\n}\n\nHelp me draft my proposed endeavor statement.",
+    "expected_output": "Skill recognizes Route A (has NIW_Evaluate JSON). Extracts application domain (public health surveillance), pillar seeds, and key evidence (CDC adoption, 9-state deployment). Conducts a brief gap-filling interview for missing ingredients (named methodology, specific outcome metrics, federal anchor beyond CDC, substitutability statement). Produces an endeavor statement that names: the specific system, the wastewater surveillance method, the CDC/state adoption as national scope evidence, and Dr. Lin's unique position as primary developer. Pattern check scorecard included. Three pillar seeds extracted directly from pillar preview.",
+    "files": [],
+    "assertions": [
+      {
+        "type": "contains",
+        "value": "Route A",
+        "description": "Skill identifies or acts on Route A (has NIW_Evaluate output)"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["wastewater", "CDC", "state health"],
+        "description": "Endeavor statement references the specific evidence from the JSON"
+      },
+      {
+        "type": "does_not_contain",
+        "value": "work as a researcher",
+        "description": "Endeavor does not describe a job role"
+      },
+      {
+        "type": "contains",
+        "value": "Pattern Check",
+        "description": "Output includes pattern check scorecard"
+      },
+      {
+        "type": "contains",
+        "value": "Pillar Seeds",
+        "description": "Output includes three pillar seeds for NIW_Pillar"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Route B — Strong expert, vague initial description (full interview needed)",
+    "description": "User has strong credentials but describes their work at field level. Skill must conduct structured interview, extract all 6 ingredients, and transform the vague description into a petition-ready endeavor statement.",
+    "prompt": "I want to build my NIW proposed endeavor. I'm a computational linguist at a pharmaceutical company. I have a PhD in Computational Linguistics, 5 first-author papers in NLP and clinical informatics journals, and I specialize in building text mining pipelines to extract adverse drug event signals from patient-reported data on social media and online health forums. My work helps identify post-market drug safety problems faster than traditional methods. What should my proposed endeavor be?",
+    "expected_output": "Skill identifies Route B (starting fresh, no draft). Recognizes vague field-level description ('helps the FDA catch drug safety signals'). Conducts ingredient interview asking for: (1) named project/system name, (2) specific national-scale problem with numbers (how many FAERS reports? what's the failure rate of current methods?), (3) named LLM methodology (not just 'LLMs' — which architecture, what specific innovation?), (4) confirms pharmacovigilance is Tier 1 domain, (5) asks for measurable outcome (detection speed, signal accuracy, scale), (6) asks for substitutability (what specifically makes this applicant's approach unique vs. other pharmacovigilance NLP tools). After collecting answers, produces two candidate endeavor statements (narrow and broad) with pattern check. Does NOT fabricate statistics or quotes.",
+    "files": [],
+    "assertions": [
+      {
+        "type": "contains_one_of",
+        "value": ["named", "call your", "what do you call", "name for"],
+        "description": "Skill asks for a project name"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["how many", "statistics", "quantified", "number", "scale"],
+        "description": "Skill asks for quantified national-scale problem"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["specific method", "named methodology", "which architecture", "what technique"],
+        "description": "Skill asks for named methodology beyond 'LLMs'"
+      },
+      {
+        "type": "does_not_contain",
+        "value": "million FAERS",
+        "description": "Skill does not fabricate statistics not provided by the user"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["FDA", "Sentinel", "pharmacovigilance", "FAERS"],
+        "description": "Skill recognizes federal anchor candidates for this domain"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Route C — Industry SWE with Pattern A failure (occupation framing)",
+    "description": "User provides a draft endeavor that describes a job role. Skill must diagnose the Pattern A failure clearly, explain why, and guide the rewrite.",
+    "prompt": "Can you review my proposed endeavor draft and help me improve it?\n\nDraft: 'My proposed endeavor is to work as a senior software engineer at Microsoft developing AI-powered cloud security tools to protect enterprise customers from cybersecurity threats. I will continue advancing my career in this field by applying machine learning to detect anomalies in network traffic and improve incident response times for large organizations.'\n\nI have 7 years of experience, a Master's in Computer Science from Carnegie Mellon, and I led the development of an anomaly detection system that monitors 40 million endpoints across Fortune 500 companies. Microsoft issued a security advisory citing our system's detection of two zero-day exploits last year.",
+    "expected_output": "Skill identifies Route C (has draft). Diagnoses clear Pattern A failure: 'work as a senior software engineer' is an occupation description, not an undertaking. Also flags Pattern B (could describe any SWE at any tech company) and Pattern C (no national scope anchor, no federal program named despite strong cybersecurity evidence). Does NOT dismiss the case — notes strong underlying evidence (40M endpoints, Microsoft advisory, zero-day detection). Explains the specific failure clearly. Then conducts a targeted gap interview: asks to name the system, asks about CISA/NIST connections, asks for measurable national outcome, asks for substitutability (why this engineer specifically). Produces improved endeavor statement that: names the specific system, anchors to CISA/EO 14028, quantifies the endpoint scale, and positions the petitioner as primary architect. Clear before/after contrast shown.",
+    "files": [],
+    "assertions": [
+      {
+        "type": "contains_one_of",
+        "value": ["Pattern A", "occupation", "job role", "not an undertaking"],
+        "description": "Skill explicitly diagnoses Pattern A failure"
+      },
+      {
+        "type": "does_not_contain",
+        "value": "NOT_QUALIFIED",
+        "description": "Skill recognizes strong underlying evidence and does not dismiss the case"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["CISA", "EO 14028", "NIST", "Executive Order", "critical infrastructure"],
+        "description": "Skill identifies cybersecurity federal anchors"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["name", "call it", "what would you call"],
+        "description": "Skill asks for a project name to replace job-title framing"
+      },
+      {
+        "type": "contains",
+        "value": "40 million",
+        "description": "Skill incorporates the strong evidence the user provided into the improved framing"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Tier 3 domain — tests field reframing when domain is weak",
+    "description": "User's work is in a Tier 3 domain (consumer personalization) but has transferable skills. Skill must flag the domain problem clearly, decline to build a weak endeavor, and guide toward a viable reframe.",
+    "prompt": "Help me write my proposed endeavor. I work at a major streaming platform and I've built recommendation systems that serve 200 million users. I have a PhD in Machine Learning from MIT and 12 publications on recommendation algorithms. My system increased user engagement by 35%. I want to use my expertise in AI for personalization to petition for NIW.",
+    "expected_output": "Skill recognizes Route B (no draft) but immediately hits the domain problem. Applies AI-as-method rule: strips 'AI' and 'recommendation algorithms' — application domain is consumer entertainment personalization, Tier 3. Flags this directly and honestly: engagement metrics are not national interest evidence; the scale (200M users) is large but does not equal national importance; recommendation systems for entertainment do not have independent NIW standing. Does NOT draft a Tier 3 endeavor. Instead, identifies legitimate reframe options this petitioner could pursue given their actual skills: (1) content moderation / disinformation detection (Tier 1-2 if framed correctly), (2) accessibility optimization (recommendation serving users with disabilities at scale — Tier 2), (3) health information recommendation systems (could anchor to public health if the applicant pivots), (4) foundational ML research angle (if publications are in top venues and cross-domain adoptable). Asks which of these resonates before proceeding. Does not promise a strong case where one doesn't exist.",
+    "files": [],
+    "assertions": [
+      {
+        "type": "contains_one_of",
+        "value": ["Tier 3", "consumer", "entertainment", "engagement", "not national interest"],
+        "description": "Skill correctly identifies and flags the Tier 3 domain problem"
+      },
+      {
+        "type": "does_not_contain",
+        "value": "My proposed endeavor is to develop recommendation systems",
+        "description": "Skill does not draft a Tier 3 endeavor"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["reframe", "alternative", "pivot", "consider", "could anchor"],
+        "description": "Skill offers viable reframe options rather than just refusing"
+      },
+      {
+        "type": "contains_one_of",
+        "value": ["disinformation", "accessibility", "health information", "foundational"],
+        "description": "Skill identifies at least one legitimate NIW-viable reframe for this applicant's skills"
+      },
+      {
+        "type": "does_not_contain",
+        "value": "200 million users demonstrates national importance",
+        "description": "Skill does not accept scale of consumer engagement as national importance evidence"
+      }
+    ]
+  }
+]
