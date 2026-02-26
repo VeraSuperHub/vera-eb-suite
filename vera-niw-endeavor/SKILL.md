@@ -5,25 +5,27 @@ description: >
   endeavor — the single most important element of an NIW petition and the #1
   RFE trigger when done wrong. Transforms raw expertise into a specific, named,
   bounded undertaking that passes USCIS scrutiny under the Dhanasar framework.
-
   Always produces TWO mandatory outputs together: (1) a petition-ready proposed
   endeavor statement (3-5 sentences, third person, all pattern checks passed),
   and (2) three named NIW pillars with rationale, structured as direct input
   for NIW_Pillar. Both outputs are always delivered together, never omitted.
-
-  ALWAYS use this skill when the user:
-  - Asks "what should my proposed endeavor be?" or "how do I define my endeavor"
-  - Has a draft endeavor that feels vague or job-description-like
-  - Says they got an RFE citing vague or broad endeavor description
-  - Has completed NIW_Evaluate and is ready to move to drafting
-  - Mentions NIW petition planning, endeavor statement, or Prong 1 strategy
-  - Asks "is my NIW endeavor good enough?" or "can you help me refine my endeavor"
-
   Use even if the user already has a draft endeavor -- run the diagnostic first.
   Part of the NIW Petition Skill System.
 ---
 
 # Vera NIW Endeavor
+
+## When to Use This Skill
+
+ALWAYS use this skill when the user:
+- Asks "what should my proposed endeavor be?" or "how do I define my endeavor"
+- Has a draft endeavor that feels vague or job-description-like
+- Says they got an RFE citing vague or broad endeavor description
+- Has completed NIW_Evaluate and is ready to move to drafting
+- Mentions NIW petition planning, endeavor statement, or Prong 1 strategy
+- Asks "is my NIW endeavor good enough?" or "can you help me refine my endeavor"
+
+---
 
 The proposed endeavor is the spine of the entire NIW petition. Every argument
 in every pillar, every recommender quote, and the Prong 3 balance test all flow
