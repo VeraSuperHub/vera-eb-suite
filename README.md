@@ -50,6 +50,16 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 
 ---
 
+## Tools
+
+In addition to skills, this suite includes standalone tools that feed data into the pipeline:
+
+| Tool | What It Does | Used By |
+|---|---|---|
+| [`google-scholar`](tools/google-scholar/) | Extracts citation metrics, publication lists, and h-index from Google Scholar (Python + Colab notebook) | `vera-niw-assemble` → Section 3 |
+
+---
+
 ## Quick Start
 
 ### Requirements
