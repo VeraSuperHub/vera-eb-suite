@@ -47,7 +47,7 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 | 5 | [`vera-niw-assemble`](vera-niw-assemble/) | Assembles the final petition package — petition letter, exhibit list, and supporting documents — as an attorney-quality .docx with cross-reference verification | 334 |
 | 6 | [`vera-niw-pl-review`](vera-niw-pl-review/) | Adversarial pre-filing review simulating a USCIS officer — 10 denial-pattern checks (A–J) mapped to real AAO denial grounds | 670 |
 | 7 | [`vera-niw-rfe-response`](vera-niw-rfe-response/) | Generates point-by-point RFE responses that quote each USCIS finding verbatim and rebut with evidence, updated metrics, and new exhibits | 541 |
-| E | [`vera-niw-entrepreneur`](vera-niw-entrepreneur/) | Evaluates and guides entrepreneur/founder NIW petitions using the USCIS Policy Manual's entrepreneur-specific framework (Jan 2025 update) | 300 |
+| 8 | [`vera-niw-entrepreneur`](vera-niw-entrepreneur/) | Evaluates and guides entrepreneur/founder NIW petitions using the USCIS Policy Manual's entrepreneur-specific framework (Jan 2025 update) | 300 |
 
 **Total: ~3,995 lines of encoded expert reasoning across 8 skills.**
 
