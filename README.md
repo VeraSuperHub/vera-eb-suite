@@ -19,17 +19,17 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
   └──────────────┘     │  seeds       │     └──────┬───────┘
                        └──────────────┘            │
                                                    ▼
-  ┌─────────────┐     ┌─────────────┐     ┌──────────────┐
-  │ 7. RFE      │     │ 6. PL       │◀────│ 5. ASSEMBLE  │
-  │ RESPONSE    │     │ REVIEW      │     │  Full .docx  │
-  │ (if needed) │     │ Adversarial │     │  petition    │
-  └─────────────┘     │ QA gate     │     └──────┬───────┘
-                      └─────────────┘            │
-                            ▲              ┌─────┴────────┐
-                            └──────────────│ 4. RECOMMEND │
-                                           │  Reference   │
-                                           │  letters     │
-                                           └──────────────┘
+    ┌─────────────┐     ┌─────────────┐     ┌──────────────┐
+    │ 7. RFE      │     │ 6. PL       │◀────│ 5. ASSEMBLE  │
+    │ RESPONSE    │     │ REVIEW      │     │  Full .docx  │
+    │ (if needed) │     │ Adversarial │     │  petition    │
+    └─────────────┘     │ QA gate     │     └──────┬───────┘
+                        └─────────────┘            │
+                              ▲              ┌─────┴────────┐
+                              └──────────────│ 4. RECOMMEND │
+                                             │  Reference   │
+                                             │  letters     │
+                                             └──────────────┘
 ```
 
 Entrepreneur cases route through **vera-niw-entrepreneur** before entering the standard pipeline at Step 2.
