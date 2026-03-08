@@ -58,16 +58,25 @@ skill/
 
 This structure is intentionally simple. A skill is a text file, not a software system. It runs on any AI assistant that accepts custom instructions. No dependencies, no deployment, no maintenance burden.
 
-## Why Open Source
+## Applying This to Other Domains
 
-Expert knowledge has historically been gatekept — by professional licensing, by consulting fees, by the simple fact that expertise lives in individual heads and doesn't scale.
+The NIW domain is the first complete implementation — 8 skills covering the entire petition lifecycle. The same methodology applies wherever expert judgment follows discoverable patterns:
 
-AI skills change this equation. Once expert judgment is decomposed into an instruction set, it costs nothing to distribute. The marginal cost of helping the 1,000th person is the same as helping the first.
+| Domain | Layer 1 (Knowledge) | Layer 2 (Heuristics) | Layer 3 (Calibration) |
+|---|---|---|---|
+| **NIW Petitions** | Dhanasar framework, AAO decisions | 10 denial patterns (A–J), 8 rebuttal patterns (R1–R8) | 31 eval test cases across tiers |
+| **Academic Peer Review** | Journal standards, field norms | Common rejection reasons, methodology red flags | Accept/revise/reject distribution |
+| **Regulatory Compliance** | Statute text, agency guidance | Violation patterns, audit triggers | Severity scoring by precedent |
+| **Clinical Diagnostics** | Diagnostic criteria, treatment protocols | Differential diagnosis heuristics | Probability calibration by presentation |
 
-Open-sourcing skills isn't charity. It's a statement about how expertise should work in the age of AI: transparent, auditable, improvable by the community, and accessible to anyone who needs it.
+To build a skill for a new domain:
 
-## What's Next
-
-The NIW domain is the first complete implementation — 7 skills covering the entire petition lifecycle. The methodology applies wherever expert judgment follows discoverable patterns: academic peer review, clinical diagnostics, regulatory compliance, financial analysis, and beyond.
+1. Find the expert whose judgment you want to encode
+2. Map their decision process (Step 1)
+3. Extract the heuristics they can't easily articulate (Step 2)
+4. Gather the reference material they consult (Step 3)
+5. Collect representative cases at each quality tier (Step 4)
+6. Design the pipeline — what feeds what (Step 5)
+7. Ship it, then iterate on real user feedback (Step 6)
 
 The question isn't whether expertise can be decomposed into AI-executable units. It's which domain gets decomposed next.
