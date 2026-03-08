@@ -37,14 +37,14 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 ## Skills
 
 | # | Skill | What It Does | Lines |
-|---|-------|-------------|-------|
-| 1 | [`vera-niw-evaluate`](skills/vera-niw-evaluate/) | Evaluates the petitioner's profile, selects the optimal pathway, identifies strengths and gaps, and produces a go/no-go recommendation with a confidence score | 571 |
-| 2 | [`vera-niw-endeavor`](skills/vera-niw-endeavor/) | Drafts the national importance endeavor statement — the single paragraph USCIS reads first — using field-specific framing patterns | 368 |
-| 3 | [`vera-niw-pillar`](skills/vera-niw-pillar/) | Writes the three-pillar petition letter covering Prong 1 (substantial merit + national importance), Prong 2 (well-positioned), and Prong 3 (balance of equities). Run once per pillar. | 452 |
-| 4 | [`vera-niw-recommendation`](skills/vera-niw-recommendation/) | Generates recommendation letters with writer-specific voice calibration, ensuring each letter covers different evidence angles without redundancy | 535 |
-| 5 | [`vera-niw-assemble`](skills/vera-niw-assemble/) | Assembles the final petition package — petition letter, exhibit list, and supporting documents — as an attorney-quality .docx with cross-reference verification | 334 |
-| 6 | [`vera-niw-pl-review`](skills/vera-niw-pl-review/) | Adversarial pre-filing review simulating a USCIS officer — 10 denial-pattern checks (A–J) mapped to real AAO denial grounds | 644 |
-| 7 | [`vera-niw-rfe-response`](skills/vera-niw-rfe-response/) | Generates point-by-point RFE responses that quote each USCIS finding verbatim and rebut with evidence, updated metrics, and new exhibits | 499 |
+| --- | --- | --- | --- |
+| 1 | [`vera-niw-evaluate`](vera-niw-evaluate) | Evaluates the petitioner's profile, selects the optimal pathway, identifies strengths and gaps, and produces a go/no-go recommendation with a confidence score | 571 |
+| 2 | [`vera-niw-endeavor`](vera-niw-endeavor) | Drafts the national importance endeavor statement — the single paragraph USCIS reads first — using field-specific framing patterns | 368 |
+| 3 | [`vera-niw-pillar`](vera-niw-pillar) | Writes the three-pillar petition letter covering Prong 1 (substantial merit + national importance), Prong 2 (well-positioned), and Prong 3 (balance of equities). Run once per pillar. | 452 |
+| 4 | [`vera-niw-recommendation`](vera-niw-recommendation) | Generates recommendation letters with writer-specific voice calibration, ensuring each letter covers different evidence angles without redundancy | 535 |
+| 5 | [`vera-niw-assemble`](vera-niw-assemble) | Assembles the final petition package — petition letter, exhibit list, and supporting documents — as an attorney-quality .docx with cross-reference verification | 334 |
+| 6 | [`vera-niw-pl-review`](vera-niw-pl-review) | Adversarial pre-filing review simulating a USCIS officer — 10 denial-pattern checks (A–J) mapped to real AAO denial grounds | 644 |
+| 7 | [`vera-niw-rfe-response`](vera-niw-rfe-response) | Generates point-by-point RFE responses that quote each USCIS finding verbatim and rebut with evidence, updated metrics, and new exhibits | 499 |
 
 **Total: 3,403 lines of encoded expert reasoning across 7 skills.**
 
@@ -55,21 +55,19 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 In addition to skills, this suite includes standalone tools that feed data into the pipeline:
 
 | Tool | What It Does | Used By |
-|---|---|---|
-| [`google-scholar`](tools/google-scholar/) | Extracts citation metrics, publication lists, and h-index from Google Scholar (Python + Colab notebook) | `vera-niw-assemble` → Section 3 |
+| --- | --- | --- |
+| [`GoogleScholar`](GoogleScholar) | Extracts citation metrics, publication lists, and h-index from Google Scholar (Python + Colab notebook) | `vera-niw-assemble` → Section 3 |
 
 ---
 
 ## Quick Start
 
 ### Requirements
-- A [Claude Pro](https://claude.ai/upgrade) subscription (for Projects with custom instructions)
+
+* A [Claude Pro, Max, Team, or Enterprise](https://claude.ai/upgrade) subscription
+* Code execution enabled (Settings → Capabilities)
 
 ### Installation
-
-**Requirements:**
-- [Claude Pro, Max, Team, or Enterprise](https://claude.ai/upgrade) subscription
-- Code execution enabled (Settings → Capabilities)
 
 **Step 1 — Download the skill**
 
@@ -89,7 +87,7 @@ That's it. Claude will automatically invoke the skill when your request matches 
 
 ### Recommended Workflow
 
-Start with **Evaluate** to get your go/no-go assessment. If the verdict is QUALIFIED or LIKELY_QUALIFIED, proceed through the pipeline in order:
+Start with **Evaluate** to get your go/no-go assessment. If the verdict is QUALIFIED or LIKELY\_QUALIFIED, proceed through the pipeline in order:
 
 ```
 Evaluate → Endeavor → Pillar (×3) → Recommendation (×N) → Assemble → PL Review
@@ -102,6 +100,7 @@ Each skill's output is designed as input for the next skill in the pipeline. The
 ## Usage Examples
 
 **Evaluate — Am I qualified?**
+
 ```
 I'm a senior data scientist at a Fortune 500 company with 5 years of experience.
 I have 3 publications (12 citations total), 2 patents pending, and my fraud
@@ -109,6 +108,7 @@ detection system processes 2M+ transactions daily. Evaluate my NIW case.
 ```
 
 **Endeavor — Define the proposed endeavor:**
+
 ```
 I just completed NIW_Evaluate and got LIKELY_QUALIFIED. Here's my JSON output:
 [paste evaluate output]
@@ -116,6 +116,7 @@ Help me draft my proposed endeavor.
 ```
 
 **Pillar — Write petition content:**
+
 ```
 Here's my endeavor statement and three pillar definitions from NIW_Endeavor:
 [paste endeavor output]
@@ -123,6 +124,7 @@ Write the petition content for Pillar 1.
 ```
 
 **PL Review — Adversarial quality check:**
+
 ```
 Review my completed petition letter as a USCIS officer. Find every weakness
 that would trigger an RFE.
@@ -130,6 +132,7 @@ that would trigger an RFE.
 ```
 
 **RFE Response — Fight back:**
+
 ```
 I received this RFE on my NIW petition. Here's the RFE notice and my
 original petition letter. Generate a point-by-point response.
@@ -170,43 +173,43 @@ niw-skill-suite/
 ├── DISCLAIMER.md
 ├── docs/
 │   └── how-skills-work.md
-└── skills/
-    ├── vera-niw-evaluate/          ← Step 1: Go/no-go assessment
-    │   ├── SKILL.md                   571 lines
-    │   ├── README.md
-    │   ├── schema/output_schema.json
-    │   ├── rubric/field_alignment.md
-    │   ├── examples/                  3 example outputs
-    │   └── evals/evals.json
-    ├── vera-niw-endeavor/          ← Step 2: Endeavor statement
-    │   ├── SKILL.md                   368 lines
-    │   ├── README.md
-    │   ├── references/                2 reference docs
-    │   └── evals/evals.json
-    ├── vera-niw-pillar/            ← Step 3: Petition content (×3)
-    │   ├── SKILL.md                   452 lines
-    │   ├── README.md
-    │   ├── schema/output_schema.json
-    │   └── evals/evals.json
-    ├── vera-niw-recommendation/    ← Step 4: Reference letters
-    │   ├── SKILL.md                   535 lines
-    │   ├── README.md
-    │   └── evals/evals.json
-    ├── vera-niw-assemble/          ← Step 5: Final .docx assembly
-    │   ├── SKILL.md                   334 lines
-    │   ├── README.md
-    │   ├── references/                2 reference docs
-    │   └── evals/evals.json
-    ├── vera-niw-pl-review/         ← Step 6: Adversarial review
-    │   ├── SKILL.md                   644 lines
-    │   ├── README.md
-    │   ├── references/                4 reference docs
-    │   └── evals/evals.json
-    └── vera-niw-rfe-response/      ← Step 7: RFE rebuttal
-        ├── SKILL.md                   499 lines
-        ├── README.md
-        ├── reference/rebuttal-patterns.md
-        └── evals/evals.json
+├── GoogleScholar/                  ← Tool: Citation metrics extraction
+├── vera-niw-evaluate/              ← Step 1: Go/no-go assessment
+│   ├── SKILL.md                       571 lines
+│   ├── README.md
+│   ├── schema/output_schema.json
+│   ├── rubric/field_alignment.md
+│   ├── examples/                      3 example outputs
+│   └── evals/evals.json
+├── vera-niw-endeavor/              ← Step 2: Endeavor statement
+│   ├── SKILL.md                       368 lines
+│   ├── README.md
+│   ├── references/                    2 reference docs
+│   └── evals/evals.json
+├── vera-niw-pillar/                ← Step 3: Petition content (×3)
+│   ├── SKILL.md                       452 lines
+│   ├── README.md
+│   ├── schema/output_schema.json
+│   └── evals/evals.json
+├── vera-niw-recommendation/        ← Step 4: Reference letters
+│   ├── SKILL.md                       535 lines
+│   ├── README.md
+│   └── evals/evals.json
+├── vera-niw-assemble/              ← Step 5: Final .docx assembly
+│   ├── SKILL.md                       334 lines
+│   ├── README.md
+│   ├── references/                    2 reference docs
+│   └── evals/evals.json
+├── vera-niw-pl-review/             ← Step 6: Adversarial review
+│   ├── SKILL.md                       644 lines
+│   ├── README.md
+│   ├── references/                    4 reference docs
+│   └── evals/evals.json
+└── vera-niw-rfe-response/          ← Step 7: RFE rebuttal
+    ├── SKILL.md                       499 lines
+    ├── README.md
+    ├── reference/rebuttal-patterns.md
+    └── evals/evals.json
 ```
 
 ---
@@ -237,10 +240,10 @@ Yes. See [Contributing](#contributing) below.
 
 Contributions welcome. Especially valuable:
 
-- **Bug reports** — Skill produced incorrect or misleading guidance? Open an issue.
-- **Test cases** — Real RFE patterns or edge cases for `evals/`. Anonymize all personal information.
-- **Reference materials** — New AAO decisions, policy updates, or adjudication trend data.
-- **Skill improvements** — Better rubrics, additional failure patterns, improved prompts.
+* **Bug reports** — Skill produced incorrect or misleading guidance? Open an issue.
+* **Test cases** — Real RFE patterns or edge cases for `evals/`. Anonymize all personal information.
+* **Reference materials** — New AAO decisions, policy updates, or adjudication trend data.
+* **Skill improvements** — Better rubrics, additional failure patterns, improved prompts.
 
 ---
 
@@ -253,4 +256,3 @@ These tools are for **informational and educational purposes only**. They do not
 ## License
 
 MIT License. See [LICENSE](LICENSE).
-
