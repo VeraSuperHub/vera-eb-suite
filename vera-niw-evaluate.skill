@@ -670,3 +670,670 @@ Apply these when the rubric alone is ambiguous:
 ## Evals
 
 See `evals/evals.json` for test cases.
+
+---
+# Schema: output_schema.json
+---
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NIW_Evaluate_Result",
+  "description": "Output contract for NIW_Evaluate skill. Consumed by NIW_Endeavor and NIW_Assemble.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "applicant",
+    "pathway",
+    "field_alignment_tier",
+    "verdict",
+    "strengths",
+    "gaps",
+    "evidence_inventory",
+    "recommended_pillars_preview",
+    "evaluator_notes"
+  ],
+  "properties": {
+    "applicant": {
+      "type": "object",
+      "required": ["name", "pronoun", "degree", "field", "university", "year_degree", "years_experience"],
+      "properties": {
+        "name":             { "type": "string" },
+        "pronoun":          { "type": "string", "examples": ["she/her", "he/him", "they/them"] },
+        "degree":           { "type": "string", "examples": ["PhD", "Master of Science", "Bachelor of Science"] },
+        "field":            { "type": "string" },
+        "university":       { "type": "string" },
+        "year_degree":      { "type": "string" },
+        "years_experience": { "type": "integer" },
+        "current_title":    { "type": "string" },
+        "current_employer": { "type": "string" }
+      }
+    },
+    "pathway": {
+      "type": "string",
+      "enum": ["A", "B", "C", "None"],
+      "description": "A=Academic, B=Professional/Industry, C=Mixed/Hybrid, None=Does not qualify on any pathway"
+    },
+    "field_alignment_tier": {
+      "type": "string",
+      "enum": ["1", "2", "3", "None"],
+      "description": "1=NSTC priority area, 2=Recognized national interest, 3=Hard to justify, None=No alignment found"
+    },
+    "application_domain": {
+      "type": "string",
+      "description": "The actual domain of national importance, stripped of technology labels (e.g. 'public health surveillance' not 'AI')"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["QUALIFIED", "LIKELY_QUALIFIED", "BORDERLINE", "NOT_QUALIFIED"]
+    },
+    "strengths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["description", "evidence_reference"],
+        "properties": {
+          "description":        { "type": "string" },
+          "evidence_reference": { "type": "string" }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["criterion", "current_state", "required_state", "evidence_score", "how_to_address", "blocking"],
+        "properties": {
+          "criterion":      { "type": "string" },
+          "current_state":  { "type": "string" },
+          "required_state": { "type": "string" },
+          "evidence_score": { "type": "integer", "minimum": 0, "maximum": 3 },
+          "how_to_address": { "type": "string" },
+          "blocking": {
+            "type": "boolean",
+            "description": "True if this gap prevents proceeding to NIW_Endeavor"
+          }
+        }
+      }
+    },
+    "evidence_inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "objective_evidence", "subjective_evidence", "score"],
+        "properties": {
+          "claim":               { "type": "string" },
+          "objective_evidence":  { "type": "array", "items": { "type": "string" } },
+          "subjective_evidence": { "type": "array", "items": { "type": "string" } },
+          "score":               { "type": "integer", "minimum": 0, "maximum": 3 },
+          "notes":               { "type": "string" }
+        }
+      }
+    },
+    "academic_metrics": {
+      "type": "object",
+      "description": "Populated only for Pathway A or C",
+      "properties": {
+        "publication_count":   { "type": "integer" },
+        "journal_count":       { "type": "integer" },
+        "conference_count":    { "type": "integer" },
+        "first_authored":      { "type": "integer" },
+        "citation_count":      { "type": "integer" },
+        "h_index":             { "type": "integer" },
+        "peer_review_count":   { "type": "integer" },
+        "top_venue_papers":    { "type": "array", "items": { "type": "string" } },
+        "citation_source":     { "type": "string", "examples": ["Google Scholar", "Semantic Scholar", "Scopus"] }
+      }
+    },
+    "recommended_pillars_preview": {
+      "type": "array",
+      "description": "2-4 high-level themes that could become NIW pillars. Feeds NIW_Endeavor.",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["title", "rationale"],
+        "properties": {
+          "title":     { "type": "string", "description": "Short pillar title (5-10 words)" },
+          "rationale": { "type": "string", "description": "1-2 sentences on why this works as a NIW pillar" }
+        }
+      }
+    },
+    "conditions_to_proceed": {
+      "type": "array",
+      "description": "For LIKELY_QUALIFIED or BORDERLINE: specific conditions that must be met before filing",
+      "items": { "type": "string" }
+    },
+    "field_alignment_notes": {
+      "type": "string",
+      "description": "Explanation of domain identification and tier assignment, especially if AI/tech labels were present"
+    },
+    "evaluator_notes": {
+      "type": "string",
+      "description": "Honest narrative summary. Flags thin areas, reframing risks, or anything that needs attention."
+    }
+  }
+}
+
+---
+# Example: qualified_output.json
+---
+{
+  "_comment": "Example output for eval_006: James Okafor — PhD Epidemiology, AI for public health. QUALIFIED.",
+  "applicant": {
+    "name": "James Okafor",
+    "pronoun": "he/him",
+    "degree": "PhD",
+    "field": "Epidemiology",
+    "university": "Johns Hopkins University",
+    "year_degree": "2019",
+    "years_experience": 4,
+    "current_title": "Research Scientist",
+    "current_employer": "CDC contractor"
+  },
+  "pathway": "A",
+  "field_alignment_tier": "1",
+  "application_domain": "Public health surveillance and pandemic preparedness",
+  "verdict": "QUALIFIED",
+  "strengths": [
+    {
+      "description": "Strong academic record: 6 peer-reviewed publications (3 first-authored), 89 citations, 11 peer reviews — exceeds all Pathway A thresholds",
+      "evidence_reference": "Google Scholar profile"
+    },
+    {
+      "description": "Application domain is public health surveillance — Tier 1 national priority independent of AI methods used",
+      "evidence_reference": "CDC guidance document publicly referencing the model"
+    },
+    {
+      "description": "Real-world government adoption: model deployed by 12 state health departments, referenced in official CDC guidance",
+      "evidence_reference": "CDC guidance document (objective, score 3) + state adoption letters (objective, score 3)"
+    }
+  ],
+  "gaps": [
+    {
+      "criterion": "Subjective evidence",
+      "current_state": "No reference letters mentioned",
+      "required_state": "At least 2 independent reference letters from senior researchers or government officials",
+      "evidence_score": 0,
+      "how_to_address": "Secure letters from CDC supervisor and one academic collaborator. Ideally include one from a state health official who adopted the model.",
+      "blocking": false
+    }
+  ],
+  "evidence_inventory": [
+    {
+      "claim": "ML model for outbreak detection adopted by state health departments",
+      "objective_evidence": [
+        "CDC guidance document citing the model (publicly available)",
+        "12 state health department adoption letters (available)"
+      ],
+      "subjective_evidence": [],
+      "score": 3,
+      "notes": "Exceptionally strong objective evidence. Government adoption at this scale is rare and highly persuasive."
+    },
+    {
+      "claim": "Peer-reviewed research record in public health surveillance",
+      "objective_evidence": [
+        "6 published papers on Google Scholar",
+        "89 citations",
+        "11 completed peer reviews"
+      ],
+      "subjective_evidence": [],
+      "score": 3,
+      "notes": "Exceeds all Pathway A thresholds. First-authored papers carry stronger weight."
+    }
+  ],
+  "academic_metrics": {
+    "publication_count": 6,
+    "journal_count": 4,
+    "conference_count": 2,
+    "first_authored": 3,
+    "citation_count": 89,
+    "h_index": null,
+    "peer_review_count": 11,
+    "top_venue_papers": [],
+    "citation_source": "Google Scholar"
+  },
+  "recommended_pillars_preview": [
+    {
+      "title": "Real-Time ML-Based Disease Outbreak Detection",
+      "rationale": "The wastewater surveillance model is the centerpiece contribution — concrete, government-adopted, and directly tied to pandemic preparedness."
+    },
+    {
+      "title": "Scalable Public Health Surveillance Infrastructure for State Agencies",
+      "rationale": "The 12-state adoption story frames this as national infrastructure, not a one-off research project."
+    },
+    {
+      "title": "Open-Access Epidemiological Research for Under-Resourced Health Systems",
+      "rationale": "If any publications are open-access or datasets are shared, this third pillar ties research dissemination to equity and national capacity-building."
+    }
+  ],
+  "conditions_to_proceed": [],
+  "field_alignment_notes": "User described field as 'AI for public health surveillance.' AI is the method; public health surveillance is the domain. Public health and pandemic preparedness is an explicit NSTC Tier 1 priority. Field alignment is strong regardless of methodology used.",
+  "evaluator_notes": "This is a strong case. The combination of a PhD from a top program, above-threshold publication and citation record, and — crucially — real government adoption with public objective evidence is exactly what NIW reviewers want to see. The only gap is absence of reference letters, which is standard to address. Recommend proceeding to NIW_Endeavor with the three pillar previews above."
+}
+
+---
+# Example: borderline_output.json
+---
+{
+  "_comment": "Example output for eval_004: David Park — Master's Biomedical Engineering, AI for drug safety, mixed evidence. BORDERLINE.",
+  "applicant": {
+    "name": "David Park",
+    "pronoun": "he/him",
+    "degree": "Master of Science",
+    "field": "Biomedical Engineering",
+    "university": "Johns Hopkins University",
+    "year_degree": "2019",
+    "years_experience": 4,
+    "current_title": "Data Scientist",
+    "current_employer": "Pfizer"
+  },
+  "pathway": "C",
+  "field_alignment_tier": "1",
+  "application_domain": "Drug safety and pharmaceutical research",
+  "verdict": "BORDERLINE",
+  "strengths": [
+    {
+      "description": "Application domain (drug safety / pharmaceutical AI) is Tier 1 — directly tied to public health and biotechnology national priorities",
+      "evidence_reference": "Field alignment assessment"
+    },
+    {
+      "description": "2 first-authored journal papers demonstrate independent research capability",
+      "evidence_reference": "Google Scholar profile"
+    },
+    {
+      "description": "Real-world industry deployment: model used in Pfizer Phase II trial design",
+      "evidence_reference": "Internal Pfizer adoption (unverified externally)"
+    }
+  ],
+  "gaps": [
+    {
+      "criterion": "Citation count",
+      "current_state": "35 citations",
+      "required_state": "~50+ citations for Pathway A threshold",
+      "evidence_score": 2,
+      "how_to_address": "Citations grow over time — cannot be manufactured. However, submitting to higher-visibility venues and publicizing existing work (conference talks, blog posts, open datasets) can accelerate organic citation growth. Consider waiting 6–12 months if citation count is close.",
+      "blocking": false
+    },
+    {
+      "criterion": "Objective evidence for industry contribution",
+      "current_state": "Pfizer adoption is internal only — no public statement, press release, or external validation",
+      "required_state": "At least one public or third-party verifiable source confirming the model's adoption and impact",
+      "evidence_score": 1,
+      "how_to_address": "Request that a senior Pfizer scientist publish or publicly present the trial design methodology (even as a conference abstract). Alternatively, if results are part of a clinical trial, the ClinicalTrials.gov registry entry may reference the methodology.",
+      "blocking": true
+    },
+    {
+      "criterion": "Peer review record",
+      "current_state": "6 completed reviews",
+      "required_state": "~10+ for Pathway A",
+      "evidence_score": 2,
+      "how_to_address": "Accept pending review invitations; proactively reach out to journal editors in the field. This gap is addressable within 3–6 months.",
+      "blocking": false
+    },
+    {
+      "criterion": "Reference letters",
+      "current_state": "Only PhD advisor letter available",
+      "required_state": "2–3 independent letters; at least one from a senior industry figure or external academic",
+      "evidence_score": 1,
+      "how_to_address": "Secure a letter from a senior Pfizer scientist (Director level or above) who can speak to the clinical impact. A letter from an external academic collaborator who can independently verify the research quality would significantly strengthen the case.",
+      "blocking": false
+    }
+  ],
+  "evidence_inventory": [
+    {
+      "claim": "ML model adopted for Pfizer Phase II trial design",
+      "objective_evidence": [],
+      "subjective_evidence": [
+        "Implied by employment at Pfizer (not explicit confirmation)"
+      ],
+      "score": 1,
+      "notes": "This is the most critical gap. Internal adoption without any external corroboration is very weak for NIW purposes. USCIS will not accept 'trust me' claims about industry impact."
+    },
+    {
+      "claim": "Peer-reviewed research in drug safety AI",
+      "objective_evidence": [
+        "3 published papers on Google Scholar",
+        "35 citations",
+        "6 peer reviews completed"
+      ],
+      "subjective_evidence": [
+        "PhD advisor reference letter"
+      ],
+      "score": 2,
+      "notes": "Below Pathway A thresholds but not disqualifying on its own — compensated partially by industry experience."
+    }
+  ],
+  "academic_metrics": {
+    "publication_count": 3,
+    "journal_count": 3,
+    "conference_count": 0,
+    "first_authored": 2,
+    "citation_count": 35,
+    "h_index": null,
+    "peer_review_count": 6,
+    "top_venue_papers": [],
+    "citation_source": "Google Scholar"
+  },
+  "recommended_pillars_preview": [
+    {
+      "title": "AI-Driven Adverse Drug Reaction Prediction at Scale",
+      "rationale": "The core contribution — if objective evidence of Pfizer adoption can be secured, this is a compelling Tier 1 pillar."
+    },
+    {
+      "title": "Accelerating Clinical Trial Design Through Predictive Risk Modeling",
+      "rationale": "Framing the work as reducing trial costs and timelines connects to national drug development competitiveness."
+    }
+  ],
+  "conditions_to_proceed": [
+    "Obtain at least one public or third-party verifiable evidence source confirming model adoption and impact at Pfizer (blocking gap)",
+    "Secure a second reference letter from a senior Pfizer or external academic source",
+    "Ideally reach ~50 citations or ~10 peer reviews before filing — consider 6-month delay if timeline permits"
+  ],
+  "field_alignment_notes": "User described field as 'AI for drug safety.' AI is the method; drug safety and pharmaceutical research is the domain. Biotechnology and public health are Tier 1 NSTC priorities. Field alignment is strong. However, field strength cannot compensate for weak evidence on the industry contribution claim.",
+  "evaluator_notes": "This case is promising but not ready. The fundamental problem is that the most impressive claim — deploying a model in clinical trial design at Pfizer — has zero external evidence. USCIS reviewers are trained to be skeptical of unverified industry claims. If David can surface any public documentation of this work (a conference abstract, a ClinicalTrials.gov entry, a co-authored paper with a Pfizer principal), the case moves to LIKELY_QUALIFIED. Without it, filing now risks a Request for Evidence (RFE) or outright denial, which damages future attempts. Recommend addressing the blocking gap before proceeding."
+}
+
+---
+# Example: not_qualified_output.json
+---
+{
+  "_comment": "Example output for eval_003: Mike Johnson — MBA, marketing manager, weak evidence. NOT_QUALIFIED.",
+  "applicant": {
+    "name": "Mike Johnson",
+    "pronoun": "he/him",
+    "degree": "Master of Business Administration",
+    "field": "Business Administration",
+    "university": "Online university (unspecified)",
+    "year_degree": "2021",
+    "years_experience": 2,
+    "current_title": "Marketing Manager",
+    "current_employer": "Mid-size retail company"
+  },
+  "pathway": "None",
+  "field_alignment_tier": "3",
+  "application_domain": "Marketing and customer engagement",
+  "verdict": "NOT_QUALIFIED",
+  "strengths": [
+    {
+      "description": "Holds an advanced degree (MBA), which satisfies the minimum education threshold on its own",
+      "evidence_reference": "Degree credential"
+    }
+  ],
+  "gaps": [
+    {
+      "criterion": "Field alignment / national importance",
+      "current_state": "Marketing and customer retention is Tier 3 — no recognized U.S. national interest standing",
+      "required_state": "Application domain must align to Tier 1 or Tier 2 national interest area",
+      "evidence_score": 0,
+      "how_to_address": "Reframing is theoretically possible but very difficult here. Marketing does not carry independent national importance. If the work touched fraud prevention, accessibility, or consumer financial protection at scale, those angles could be explored — but they must be genuine and evidenced, not retrofitted.",
+      "blocking": true
+    },
+    {
+      "criterion": "Objective evidence",
+      "current_state": "LinkedIn post by the applicant themselves",
+      "required_state": "Third-party verifiable source (company announcement, press release, government report, news coverage)",
+      "evidence_score": 0,
+      "how_to_address": "Self-reported evidence is not credible to USCIS. The company must publicly confirm the outcomes, or a credible third party must independently reference the results.",
+      "blocking": true
+    },
+    {
+      "criterion": "Subjective evidence",
+      "current_state": "Verbal confirmation from a colleague",
+      "required_state": "Formal written reference letter from manager or senior stakeholder with title, affiliation, and specific contribution details",
+      "evidence_score": 0,
+      "how_to_address": "A proper reference letter must be written and signed on company letterhead. The author should be able to speak credibly to the applicant's specific role and measurable contribution.",
+      "blocking": true
+    },
+    {
+      "criterion": "Professional experience",
+      "current_state": "2 years experience",
+      "required_state": "Minimum 3 years for Pathway B (industry track); 5 years if relying on bachelor's + experience",
+      "evidence_score": 1,
+      "how_to_address": "This gap resolves with time. In 1 year, the experience threshold is met — but the field and evidence gaps are more fundamental.",
+      "blocking": true
+    },
+    {
+      "criterion": "Research / publication record",
+      "current_state": "2 papers in open-access journals, 4 citations",
+      "required_state": "5+ publications with ~50 citations for Pathway A; journals should not be predatory",
+      "evidence_score": 1,
+      "how_to_address": "Open-access does not automatically mean predatory, but with only 4 citations, these publications carry very little weight. Verify journal legitimacy against Cabells or similar. Even if legitimate, 2 papers and 4 citations is far below the Pathway A threshold.",
+      "blocking": true
+    }
+  ],
+  "evidence_inventory": [
+    {
+      "claim": "Customer loyalty program increased retention by 15%",
+      "objective_evidence": [],
+      "subjective_evidence": [
+        "Applicant's own LinkedIn post (not credible — self-reported)",
+        "Verbal colleague confirmation (not acceptable — not in writing, no authority)"
+      ],
+      "score": 0,
+      "notes": "Zero credible evidence for the primary professional claim. This is the most critical problem in the case."
+    },
+    {
+      "claim": "Published research record",
+      "objective_evidence": [
+        "2 papers in open-access journals",
+        "4 total citations"
+      ],
+      "subjective_evidence": [],
+      "score": 1,
+      "notes": "Below threshold and in a domain (marketing) that does not carry national importance. Verify journals are not predatory."
+    }
+  ],
+  "academic_metrics": {
+    "publication_count": 2,
+    "journal_count": 2,
+    "conference_count": 0,
+    "first_authored": null,
+    "citation_count": 4,
+    "h_index": null,
+    "peer_review_count": 0,
+    "top_venue_papers": [],
+    "citation_source": "Unspecified"
+  },
+  "recommended_pillars_preview": [],
+  "conditions_to_proceed": [],
+  "field_alignment_notes": "The application domain is marketing and customer engagement. This is Tier 3. Using data analytics or ML tools for marketing optimization does not elevate the domain. Marketing does not have recognized U.S. national interest standing. A reframe toward consumer financial protection or fraud prevention would require genuine, evidenced work in those areas — not a relabeling of the same project.",
+  "evaluator_notes": "This case does not qualify and should not proceed to petition drafting at this time. There are five blocking gaps, the most fundamental being field alignment and complete absence of credible evidence. Filing in this state would almost certainly result in denial and could complicate future immigration applications. The honest path forward: (1) transition to a role with clearer national importance (e.g., fraud/security, public health, infrastructure); (2) build a 3–5 year record with verifiable, externally evidenced contributions; (3) secure proper reference letters. Revisit in 2–3 years with a stronger profile."
+}
+
+---
+# Rubric: field_alignment.md
+---
+# Field Alignment Reference
+
+**Last updated:** March 2026
+**Rule:** Technology labels (AI, ML, data science, blockchain, cloud) are METHODS.
+Strip them. Evaluate the APPLICATION DOMAIN.
+
+---
+
+## The Core Test
+
+> "AI applied to *what*?"
+> "[Technology] used for *what purpose*, serving *whom*, at *what scale*?"
+
+The answer to that question is the domain. That domain determines tier.
+
+---
+
+## Tier 1 — Bipartisan / Cross-Administration Priority Areas
+
+Full national importance standing. Strong foundation for NIW. These domains
+have maintained priority status across administrations (Obama → Trump → Biden → Trump).
+
+| Domain | Examples |
+|---|---|
+| Semiconductor / Microelectronics | Chip design, fab yield, supply chain, onshoring |
+| Cybersecurity / Critical Infrastructure | Threat detection, grid security, network defense |
+| Biotechnology / Public Health | Disease surveillance, pandemic response, drug development |
+| Energy Security / Energy Independence | Grid optimization, renewable energy, fossil fuel technology, nuclear, LNG infrastructure, energy storage |
+| Quantum Information Science | Quantum computing, quantum networking, cryptography |
+| Advanced Manufacturing / Domestic Production | Robotics, materials science, precision manufacturing, reshoring |
+| Space Technology / Defense Technology | Launch systems, satellite infrastructure, space medicine, defense R&D, missile defense |
+| STEM Education / Workforce Pipeline | Science education, STEM access and equity |
+| Foundational AI/CS Research* | New architectures, safety alignment, training methods |
+| Critical Mineral Supply Chains | Rare earth processing, mining technology, supply chain independence |
+
+*Foundational AI only if: top venue publications (NeurIPS/ICML/ICLR/Nature/Science)
+AND cross-domain adoption evidence. "I do ML research" is not sufficient.
+
+**2025-2026 Administration Emphasis Note:** The current administration prioritizes
+domestic manufacturing, energy independence (including fossil fuels — broader than
+"clean energy" alone), national security/defense technology, and supply chain
+independence from foreign adversaries. Frame endeavors accordingly. The Biden-era
+STEM-specific executive order was rescinded, but Dhanasar remains the controlling
+standard and STEM fields remain strong — just not through executive order mandate.
+
+---
+
+## Tier 2 — Recognized National Interest, Requires Stronger Evidence
+
+Can support NIW but framing and evidence must be more rigorous.
+
+| Domain | Key Framing Requirement |
+|---|---|
+| Financial security / fraud prevention | Must show systemic or national-scale impact, not just company KPIs |
+| Transportation safety / Autonomous systems | Must connect to infrastructure or public safety at scale |
+| Agriculture / Food security | Must connect to supply chain resilience or feeding populations |
+| Supply chain resilience | Must connect to U.S. economic security or critical goods |
+| Drug safety / Pharmacovigilance | Must connect to public health outcomes, not just company efficiency |
+| Education technology | Must tie to workforce outcomes, equity, or STEM pipeline |
+| Environmental monitoring / Disaster response | Must connect to public safety or infrastructure |
+| Water infrastructure / Water security | Must connect to public health or critical infrastructure |
+| Housing / Construction technology | Must connect to affordability crisis or infrastructure modernization at scale |
+
+---
+
+## Tier 3 — Difficult to Justify
+
+High burden of proof. Field does not carry independent national importance.
+Evidence and framing must be exceptional — and even then, risk is high.
+
+| Domain | Why It's Difficult |
+|---|---|
+| Marketing / AdTech | Business optimization, not public benefit |
+| Consumer personalization | Engagement ≠ national interest |
+| Retail / E-commerce | No public benefit standing |
+| Entertainment / Media | Unless specifically disinformation, accessibility, or IP protection |
+| Social media engagement | Growth metrics are not national interest metrics |
+| General BI / Analytics | Too broad; must identify specific Tier 1–2 application |
+| HR / Talent optimization | Internal company function |
+
+---
+
+## Common Misclassifications
+
+| User Claims | Actual Tier | Why |
+|---|---|---|
+| "AI research" (no domain) | None | AI alone is a method. No domain = no tier. |
+| "AI for healthcare" | 1 | Public health is Tier 1 |
+| "AI for drug discovery" | 1 | Biotechnology is Tier 1 |
+| "AI for cybersecurity" | 1 | Cybersecurity is Tier 1 |
+| "AI for climate modeling" | 1 | Clean energy/climate is Tier 1 |
+| "AI for fraud detection (banking)" | 2 | Financial security — needs national scale evidence |
+| "AI for personalized medicine" | 1 | Public health + precision medicine |
+| "AI for marketing personalization" | 3 | Marketing is Tier 3 regardless of AI |
+| "AI for recommendation systems" | 3 | Consumer engagement, not national interest |
+| "ML for supply chain" | 2 | Supply chain resilience — if tied to critical goods |
+| "NLP for content moderation" | 2 | Could be framed as disinformation/infrastructure protection |
+| "Data science for finance" | 2–3 | Depends entirely on application: fraud=2, trading=3 |
+| "Computer vision for retail" | 3 | Retail optimization is Tier 3 |
+| "Computer vision for medical imaging" | 1 | Public health is Tier 1 |
+
+---
+
+## Edge Cases Requiring Judgment
+
+**Disinformation / Content moderation:**
+Could be Tier 1 (national security, election integrity) or Tier 3 (social media
+engagement), depending on framing and scale. Must demonstrate genuine connection
+to democratic infrastructure, not just platform health metrics.
+
+**FinTech / Financial services:**
+Fraud prevention and systemic risk → Tier 2 (strong framing needed)
+Consumer lending optimization → Tier 3
+Payment infrastructure security → Tier 2
+Algorithmic trading → Tier 3
+
+**Education technology:**
+K-12 STEM pipeline, underserved communities, workforce development → Tier 2
+Consumer tutoring apps, test prep → Tier 3
+
+**Consumer health apps:**
+Clinical-grade tools, FDA-regulated, population health → Tier 1–2
+Wellness/fitness tracking, lifestyle → Tier 3
+
+
+---
+
+## Additional Tier 2 Domains (RFE-context additions)
+
+| Domain | Key Framing Requirement |
+|---|---|
+| Pharmacovigilance / Drug safety surveillance | Must connect to public health outcomes and national-scale patient populations, not company efficiency |
+| NLP/text analytics for clinical records | Must tie to patient safety, outcomes, or FDA reporting obligations |
+| LLM annotation / AI evaluation methodology | Must connect to AI safety, reliability, or federal AI governance initiatives |
+| Biometric / identity security systems | Must demonstrate national-scale fraud prevention or critical infrastructure protection |
+
+---
+
+## 2025-2026 Administration-Specific Framing Guidance
+
+**Stronger under current administration:**
+- Energy independence (including oil, gas, LNG, nuclear — not just renewables)
+- Domestic manufacturing and reshoring
+- Defense technology, border security technology
+- Critical mineral independence from China
+- AI safety and AI governance (bipartisan)
+
+**Weaker under current administration:**
+- "Climate change" framing alone — reframe as "energy security" or "grid resilience"
+- DEI-focused education initiatives — reframe as "workforce pipeline" or "STEM competitiveness"
+- International development focus — reframe as "U.S. economic competitiveness"
+
+**Unchanged / bipartisan:**
+- Public health, pandemic preparedness
+- Cybersecurity, critical infrastructure
+- Semiconductor independence
+- STEM research and education (framing adjusted, priority stable)
+- Drug safety, pharmaceutical innovation
+
+**Key principle:** The Dhanasar framework is administration-agnostic. But "national
+importance" is inherently policy-sensitive. Frame the same work differently
+depending on which federal priorities are active. The underlying evidence doesn't
+change — the strategic emphasis does.
+
+---
+
+## Entrepreneur-Specific Field Alignment
+
+**USCIS Policy Manual (Jan 2025) explicitly addresses entrepreneurs.**
+Not every entrepreneur qualifies. Key distinctions:
+
+- Opening a consulting firm in a shortage occupation ≠ national importance
+- General industry-level importance claims (e.g., "car dealerships contribute $X to GDP") are insufficient
+- Must show the **specific** endeavor's national impact, not the industry's
+- Entrepreneurs in Tier 1-2 domains have stronger standing but still need detailed evidence
+- Entrepreneurs in Tier 3 domains face very high burden — job creation alone is insufficient
+
+See vera-niw-entrepreneur skill for the full entrepreneur evidence framework.
+
+---
+
+## RFE-Specific Warning: Software Engineers and Data Scientists
+
+USCIS applies **heightened scrutiny** to petitioners with titles like "software engineer,"
+"data scientist," "machine learning engineer," or "AI researcher" because these
+occupations are widely available in the domestic labor market.
+
+For these petitioners:
+- The technology label ("AI," "ML," "deep learning") carries zero independent weight
+- The application domain determines everything — strip the tech label first
+- The specific named project/tool/system must be the unit of evaluation, not the role
+- A petitioner who "builds AI systems" is not an NIW petitioner until we know what
+  the AI system does, for whom, at what scale, and with what verifiable outcomes
