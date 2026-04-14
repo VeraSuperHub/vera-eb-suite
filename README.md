@@ -1,4 +1,4 @@
-# NIW Skill Suite
+# Vera Petition Skill Suite
 
 > Hi, I'm **Vera** — a silicon-based rabbit and AI immigration agent, created by Veronica.
 >
@@ -6,15 +6,17 @@
 >
 > Everything in this repo is what I can do. What I can't do is assess whether your specific case will be approved, give legal advice, or replace an experienced immigration attorney. That's a human job.
 
-**Open-source AI skills that guide petitioners through the complete EB-2 National Interest Waiver process — from initial case evaluation to RFE response.**
+**Open-source AI skills that guide petitioners through the complete EB-1 (Extraordinary Ability / Outstanding Researcher) and EB-2 NIW (National Interest Waiver) petition processes — from initial case evaluation to RFE response.**
 
 Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (Administrative Appeals Office) decisions](https://www.uscis.gov/administrative-appeals/aao-decisions) and updated with 2024–2025 adjudication trends. Built for [Claude](https://claude.ai).
 
-> **Why this exists:** Immigration is high-stakes and information asymmetry shouldn't determine outcomes. A seasoned NIW attorney makes dozens of judgment calls during petition preparation — most follow discoverable patterns. This project decomposes those patterns into modular, testable, improvable AI skills so every applicant can access expert-level guidance.
+> **Why this exists:** Immigration is high-stakes and information asymmetry shouldn't determine outcomes. A seasoned immigration attorney makes dozens of judgment calls during petition preparation — most follow discoverable patterns. This project decomposes those patterns into modular, testable, improvable AI skills so every applicant can access expert-level guidance.
 
 ---
 
-## The Pipeline
+## The Pipelines
+
+### NIW Pipeline (EB-2 National Interest Waiver)
 
 ```
   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -40,24 +42,75 @@ Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (A
 
 Entrepreneur cases route through **vera-niw-entrepreneur** before entering the standard pipeline at Step 2.
 
+### EB-1 Pipeline (Extraordinary Ability / Outstanding Researcher)
+
+```
+  ┌──────────────┐     ┌──────────────────────────────────────┐
+  │  1. EVALUATE │────▶│  2. CRITERION SKILLS (pick ≥3)       │
+  │  Go/no-go    │     │  ┌────────────┐  ┌────────────────┐  │
+  │  EB-1A vs    │     │  │ AUTHORSHIP │  │ ORIGINAL       │  │
+  │  EB-1B       │     │  │ (Crit. 6)  │  │ CONTRIBUTIONS  │  │
+  │              │     │  └────────────┘  │ (Crit. 5)      │  │
+  └──────────────┘     │  ┌────────────┐  └────────────────┘  │
+                       │  │ JUDGING    │  ┌────────────────┐  │
+                       │  │ (Crit. 4)  │  │ CRITICAL ROLE  │  │
+                       │  └────────────┘  │ (Crit. 8)      │  │
+                       │  ┌────────────┐  └────────────────┘  │
+                       │  │ PUBLISHED  │                      │
+                       │  │ MATERIAL   │                      │
+                       │  │ (Crit. 3)  │                      │
+                       │  └────────────┘                      │
+                       └──────────────────┬───────────────────┘
+                                          ▼
+    ┌─────────────┐     ┌─────────────┐  ┌──────────────┐
+    │ 6. RFE      │     │ 5. PL       │◀─│ 4. ASSEMBLE  │
+    │ RESPONSE    │     │ REVIEW      │  │  Full .docx  │
+    │ (if needed) │     │ Adversarial │  │  petition    │
+    └─────────────┘     │ QA gate     │  └──────┬───────┘
+                        └─────────────┘         │
+                              ▲           ┌─────┴────────┐
+                              └───────────│ 3. RECOMMEND │
+                                          │  + FINAL     │
+                                          │  MERITS      │
+                                          └──────────────┘
+```
+
 ---
 
 ## Skills
 
-| # | Skill | What It Does | Lines |
-|---|-------|-------------|-------|
-| 1 | [`vera-niw-evaluate`](vera-niw-evaluate/) | Evaluates the petitioner's profile, selects the optimal pathway, identifies strengths and gaps, and produces a go/no-go recommendation with a confidence score | 672 |
-| 2 | [`vera-niw-endeavor`](vera-niw-endeavor/) | Drafts the national importance endeavor statement — the single paragraph USCIS reads first — using field-specific framing patterns | 394 |
-| 3 | [`vera-niw-pillar`](vera-niw-pillar/) | Writes the three-pillar petition letter covering Prong 1 (substantial merit + national importance), Prong 2 (well-positioned), and Prong 3 (balance of equities). Run once per pillar. | 510 |
-| 4 | [`vera-niw-recommendation`](vera-niw-recommendation/) | Generates recommendation letters with writer-specific voice calibration, ensuring each letter covers different evidence angles without redundancy | 574 |
-| 5 | [`vera-niw-assemble`](vera-niw-assemble/) | Assembles the final petition package — petition letter, exhibit list, and supporting documents — as an attorney-quality .docx with cross-reference verification | 334 |
-| 6 | [`vera-niw-pl-review`](vera-niw-pl-review/) | Adversarial pre-filing review simulating a USCIS officer — 10 denial-pattern checks (A–J) mapped to real AAO denial grounds | 670 |
-| 7 | [`vera-niw-rfe-response`](vera-niw-rfe-response/) | Generates point-by-point RFE responses that quote each USCIS finding verbatim and rebut with evidence, updated metrics, and new exhibits | 541 |
-| 8 | [`vera-niw-entrepreneur`](vera-niw-entrepreneur/) | Evaluates and guides entrepreneur/founder NIW petitions using the USCIS Policy Manual's entrepreneur-specific framework (Jan 2025 update) | 300 |
+### NIW Skills ([`vera-niw-skillset/`](vera-niw-skillset/))
 
-**Total: ~3,995 lines of encoded expert reasoning across 8 skills.**
+| # | Skill | What It Does |
+|---|-------|-------------|
+| 1 | `vera-niw-evaluate` | Evaluates the petitioner's profile, selects the optimal pathway, identifies strengths and gaps, and produces a go/no-go recommendation with a confidence score |
+| 2 | `vera-niw-endeavor` | Drafts the national importance endeavor statement — the single paragraph USCIS reads first — using field-specific framing patterns |
+| 3 | `vera-niw-pillar` | Writes the three-pillar petition letter covering Prong 1 (substantial merit + national importance), Prong 2 (well-positioned), and Prong 3 (balance of equities). Run once per pillar |
+| 4 | `vera-niw-recommendation` | Generates recommendation letters with writer-specific voice calibration, ensuring each letter covers different evidence angles without redundancy |
+| 5 | `vera-niw-assemble` | Assembles the final petition package — petition letter, exhibit list, and supporting documents — as an attorney-quality .docx with cross-reference verification |
+| 6 | `vera-niw-pl-review` | Adversarial pre-filing review simulating a USCIS officer — 10 denial-pattern checks (A–J) mapped to real AAO denial grounds |
+| 7 | `vera-niw-rfe-response` | Generates point-by-point RFE responses that quote each USCIS finding verbatim and rebut with evidence, updated metrics, and new exhibits |
+| 8 | `vera-niw-entrepreneur` | Evaluates and guides entrepreneur/founder NIW petitions using the USCIS Policy Manual's entrepreneur-specific framework (Jan 2025 update) |
 
-> **Got a weak research profile?** If `vera-niw-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) — my other skill suite that takes a research question and dataset to a publication-ready manuscript, end-to-end.
+### EB-1 Skills ([`vera-eb1-skillset/`](vera-eb1-skillset/))
+
+| # | Skill | What It Does |
+|---|-------|-------------|
+| 1 | `vera-eb1-evaluate` | Evaluates EB-1A vs EB-1B eligibility, maps evidence to the 10 criteria, and produces a go/no-go recommendation |
+| 2 | `vera-eb1-authorship` | Criterion 6: authorship of scholarly articles with venue rankings and citation impact analysis |
+| 3 | `vera-eb1-original-contributions` | Criterion 5: original contributions of major significance with before/after framing |
+| 4 | `vera-eb1-judging` | Criterion 4: evidence of judging the work of others (peer review, panels, editorial boards) |
+| 5 | `vera-eb1-critical-role` | Criterion 8: leading or critical role in distinguished organizations |
+| 6 | `vera-eb1-published-material` | Criterion 3: published material about the petitioner in professional or major media |
+| 7 | `vera-eb1-recommendation` | Generates EB-1 reference letters from a recommender's perspective |
+| 8 | `vera-eb1-final-merits` | Kazarian Step 2: final merits determination arguing sustained national/international acclaim |
+| 9 | `vera-eb1-assemble` | Assembles the complete EB-1 I-140 petition letter as a formatted .docx |
+| 10 | `vera-eb1-pl-review` | Adversarial pre-filing review using the Kazarian two-step analytical framework |
+| 11 | `vera-eb1-rfe-response` | Generates point-by-point EB-1 RFE responses with evidence and rebuttal patterns |
+
+**Total: 19 skills across both petition categories.**
+
+> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) — my other skill suite that takes a research question and dataset to a publication-ready manuscript, end-to-end.
 
 ---
 
@@ -82,12 +135,10 @@ In addition to skills, this suite includes standalone tools that feed data into 
 
 **Step 1 — Download the skill**
 
-Download the ZIP file for the skill you want from this repo. Each skill folder is a standalone package.
-
-You can download individual skill folders, or clone the entire repo:
+Download the `.skill` file(s) you need from the [`vera-niw-skillset/`](vera-niw-skillset/) or [`vera-eb1-skillset/`](vera-eb1-skillset/) folder. Or clone the entire repo:
 
 ```bash
-git clone https://github.com/YourUsername/niw-skill-suite.git
+git clone https://github.com/VeraSuperHub/vera-petition-skills.git
 ```
 
 **Step 2 — Upload to Claude**
@@ -95,12 +146,12 @@ git clone https://github.com/YourUsername/niw-skill-suite.git
 1. Go to [Settings → Capabilities](https://claude.ai/settings/capabilities)
 2. Scroll to the **Skills** section
 3. Click **"Upload skill"**
-4. Upload the skill's ZIP file
+4. Upload the `.skill` file
 5. Toggle the skill **on**
 
 That's it. Claude will automatically invoke the skill when your request matches its description — no manual activation needed. You'll see the skill appear in Claude's chain of thought as it works.
 
-**Install one skill at a time.** Each skill is a separate ZIP upload. For the full pipeline, install all 8.
+**Install one skill at a time.** Each skill is a separate upload. For the full NIW pipeline, install all 8. For EB-1, install all 11.
 
 ### Google Scholar Tool Setup
 
@@ -189,72 +240,43 @@ The key insight: an experienced NIW attorney doesn't use magic — they apply di
 ## Repo Structure
 
 ```
-niw-skill-suite/
+vera-petition-skills/
 ├── README.md
-├── LICENSE                            (MIT)
+├── LICENSE                            (GPL-3.0)
 ├── DISCLAIMER.md                      (legal disclaimer)
 ├── CONTRIBUTING.md                    (contribution guidelines)
 ├── CHANGELOG.md                       (version history)
-├── .gitignore
 │
-├── vera-niw-evaluate/                 ← Step 1: Go/no-go assessment
-│   ├── SKILL.md                          672 lines
-│   ├── README.md
-│   ├── schema/output_schema.json
-│   ├── rubric/field_alignment.md
-│   ├── examples/                         3 example outputs
-│   └── evals/evals.json                  6 test cases
+├── vera-niw-skillset/                 ← NIW skills (8 .skill files)
+│   ├── vera-niw-evaluate.skill
+│   ├── vera-niw-endeavor.skill
+│   ├── vera-niw-pillar.skill
+│   ├── vera-niw-recommendation.skill
+│   ├── vera-niw-assemble.skill
+│   ├── vera-niw-pl-review.skill
+│   ├── vera-niw-rfe-response.skill
+│   └── vera-niw-entrepreneur.skill
 │
-├── vera-niw-endeavor/                 ← Step 2: Endeavor statement
-│   ├── SKILL.md                          394 lines
-│   ├── README.md
-│   ├── references/                       2 reference docs
-│   └── evals/evals.json                  4 test cases
+├── vera-eb1-skillset/                 ← EB-1 skills (11 .skill files)
+│   ├── vera-eb1-evaluate.skill
+│   ├── vera-eb1-authorship.skill
+│   ├── vera-eb1-original-contributions.skill
+│   ├── vera-eb1-judging.skill
+│   ├── vera-eb1-critical-role.skill
+│   ├── vera-eb1-published-material.skill
+│   ├── vera-eb1-recommendation.skill
+│   ├── vera-eb1-final-merits.skill
+│   ├── vera-eb1-assemble.skill
+│   ├── vera-eb1-pl-review.skill
+│   └── vera-eb1-rfe-response.skill
 │
-├── vera-niw-pillar/                   ← Step 3: Petition content (×3)
-│   ├── SKILL.md                          510 lines
-│   ├── README.md
-│   ├── schema/output_schema.json
-│   └── evals/evals.json                  4 test cases
-│
-├── vera-niw-recommendation/           ← Step 4: Reference letters
-│   ├── SKILL.md                          574 lines
-│   ├── README.md
-│   └── evals/evals.json                  4 test cases
-│
-├── vera-niw-assemble/                 ← Step 5: Final .docx assembly
-│   ├── SKILL.md                          334 lines
-│   ├── README.md
-│   ├── references/
-│   │   ├── petition-structure.md         docx-js formatting spec
-│   │   └── gs-schema.md                  Google Scholar data schema
-│   └── evals/evals.json                  3 test cases
-│
-├── vera-niw-pl-review/                ← Step 6: Adversarial review
-│   ├── SKILL.md                          670 lines
-│   ├── README.md
-│   ├── references/
-│   │   ├── pub-diligence.md              5-step publication audit
-│   │   ├── field-alignment.md            3-tier field classification
-│   │   ├── eb2-eligibility.md            Jan 2025 policy gate
-│   │   └── vera-niw-pl-review-deployable.md  standalone prompt version
-│   └── evals/evals.json                  4 test cases
-│
-├── vera-niw-rfe-response/             ← Step 7: RFE rebuttal
-│   ├── SKILL.md                          541 lines
-│   ├── README.md
-│   ├── reference/rebuttal-patterns.md    R1–R8 rebuttal library
-│   └── evals/evals.json                  6 test cases
-│
-├── vera-niw-entrepreneur/             ← Entrepreneur pathway
-│   ├── SKILL.md                          300 lines
-│   ├── README.md
-│   └── evals/evals.json                  4 test cases
+├── vera-niw.plugin                    ← Bundled NIW plugin
+├── vera-eb1.plugin                    ← Bundled EB-1 plugin
 │
 └── GoogleScholar/                     ← Citation data tool
-    ├── scholar.py                        Python scraper (~1000 lines)
-    ├── scholar_colab_demo.ipynb          Colab notebook
-    └── requirements.txt                  Python dependencies
+    ├── scholar.py
+    ├── scholar_colab_demo.ipynb
+    └── requirements.txt
 ```
 
 ---
@@ -274,7 +296,7 @@ No tool or attorney can guarantee approval. These skills help you identify weakn
 Generic prompts produce generic output. Each skill here encodes hundreds of specific decision rules — failure pattern detection, field-specific framing, USCIS-language calibration — derived from systematic analysis of AAO decisions. The difference is the same as between asking a friend for advice and consulting a specialist.
 
 **Can I use this with GPT-4 or other models?**
-The skills are optimized for Claude but the instructions are model-agnostic text. They may work with other capable models, though output quality may vary. The `vera-niw-pl-review` folder includes a [standalone deployable prompt](vera-niw-pl-review/references/vera-niw-pl-review-deployable.md) that works with any LLM API.
+The skills are optimized for Claude but the instructions are model-agnostic text. They may work with other capable models, though output quality may vary.
 
 **Can I contribute?**
 Yes. See [CONTRIBUTING.md](CONTRIBUTING.md).

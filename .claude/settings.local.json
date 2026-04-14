@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(mv /Users/veronica/Downloads/03.Petition/dist/vera-niw-*.skill /Users/veronica/Downloads/03.Petition/dist/niw/)",
+      "Bash(mv /Users/veronica/Downloads/03.Petition/dist/vera-eb1-*.skill /Users/veronica/Downloads/03.Petition/dist/eb1/)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(gh auth:*)",
+      "Bash(git pull:*)",
+      "Bash(git mv:*)"
+    ]
+  }
+}
