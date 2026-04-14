@@ -1,0 +1,60 @@
+{
+  "outcome_type": "binary",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "class_balance_threshold": 0.1,
+  "fisher_cell_threshold": 5,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "subgroup_min_n": 5,
+  "logistic_regression": {
+    "report_or": true,
+    "report_raw_b": "supplementary",
+    "pseudo_r2": [
+      "mcfadden",
+      "nagelkerke"
+    ],
+    "hosmer_lemeshow_groups": 10
+  },
+  "roc": {
+    "threshold_method": "youden",
+    "report_ci": true,
+    "note_in_sample": true
+  },
+  "tree_models": {
+    "cart_max_depth": 4,
+    "rf_n_trees": 500,
+    "lightgbm": {
+      "n_estimators": 500,
+      "max_depth": 3,
+      "learning_rate": 0.01,
+      "num_leaves": 31
+    },
+    "small_n_threshold": 200
+  },
+  "manuscript": {
+    "style": "APA7",
+    "decimal_places_or": 2,
+    "decimal_places_p": 3,
+    "decimal_places_effect": 3,
+    "decimal_places_proportion": 1
+  },
+  "code_style_variation": {
+    "enabled": true,
+    "dimensions": 7,
+    "spec": "reference/specs/code-style-variation.md"
+  },
+  "output_variation": {
+    "enabled": true,
+    "protocol": "reference/specs/output-variation-protocol.md",
+    "sentence_bank": "reference/patterns/sentence-bank.md"
+  }
+}

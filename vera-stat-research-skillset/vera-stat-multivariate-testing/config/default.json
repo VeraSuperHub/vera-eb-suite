@@ -1,0 +1,30 @@
+{
+  "outcome_type": "multivariate",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "primary": "pillai_trace",
+    "alternatives": [
+      "wilks_lambda",
+      "hotelling_lawley",
+      "roys_largest"
+    ]
+  },
+  "example_dataset": {
+    "R": "iris",
+    "Python": "sklearn.datasets.load_iris()"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

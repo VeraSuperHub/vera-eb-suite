@@ -1,0 +1,4 @@
+"Test","Statistic","p_value","Effect_Size"
+"Chi-square","456.87 (df=1)","< .001","V = 0.456 (medium)"
+"Fisher's exact","-","< .001","-"
+"Odds ratio","10.15","-","95% CI [8.03, 12.83]"

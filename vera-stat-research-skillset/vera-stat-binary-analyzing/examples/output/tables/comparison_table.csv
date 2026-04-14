@@ -1,0 +1,5 @@
+Method,Lens,Key_Finding
+Logistic Regression,Adjusted effects (ORs),Sex strongest adjusted predictor
+CART,Interpretable splits,Sex is root split
+Random Forest,Ensemble stability,Sex rank 1 by permutation importance
+LightGBM,Gradient-boosted patterns,Sex highest gain importance

@@ -1,0 +1,27 @@
+{
+  "family": "sem",
+  "subtype": "full",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "primary_engine": "lavaan",
+  "secondary_engine": "semopy",
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "fit_indices": [
+    "chisq",
+    "df",
+    "cfi",
+    "tli",
+    "rmsea",
+    "srmr"
+  ],
+  "report_standardized_paths": true,
+  "bootstrap_indirects_free": false,
+  "example_dataset": {
+    "R": "lavaan::PoliticalDemocracy",
+    "Python": "user-provided SEM-ready covariance/data"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

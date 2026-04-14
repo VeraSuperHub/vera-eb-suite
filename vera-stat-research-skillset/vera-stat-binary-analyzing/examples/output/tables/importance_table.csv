@@ -1,0 +1,6 @@
+Variable,Logistic_|std_coef|,RF_Permutation,LightGBM_Gain,Rank_Consensus
+Sex (Female),100.0,100.0,100.0,1
+Class: 3rd,35.9,9.5,99.8,2
+Class: 1st,31.6,1.5,97.0,3
+Age (Child),25.2,14.7,0.0,4
+Class: 2nd,5.4,1.1,22.6,5

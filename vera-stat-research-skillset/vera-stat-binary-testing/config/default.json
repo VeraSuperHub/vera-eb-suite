@@ -1,0 +1,29 @@
+{
+  "outcome_type": "binary",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "class_balance_threshold": 0.1,
+  "fisher_cell_threshold": 5,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "association": "cramers_v",
+    "binary_comparison": "odds_ratio"
+  },
+  "example_dataset": {
+    "R": "Titanic (as.data.frame)",
+    "Python": "sm.datasets.get_rdataset('Titanic').data",
+    "offline_fallback": "base R Titanic"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

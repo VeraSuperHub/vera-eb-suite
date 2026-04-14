@@ -1,0 +1,21 @@
+Variable,LMM_importance,RF_importance,LightGBM_importance,LMM_importance_rank,RF_importance_rank,LightGBM_importance_rank,Rank_Consensus
+C(Diet)[T.2],12.2,0.0,21.3,9.0,13.0,11.5,11.2
+C(Diet)[T.3],37.3,0.0,21.3,6.0,13.0,11.5,10.2
+C(Diet)[T.4],4.2,0.0,21.3,10.0,13.0,11.5,11.5
+Time,100.0,9.3,94.7,1.0,4.5,3.5,3.0
+Time:C(Diet)[T.2],21.7,—,—,8.0,,,8.0
+Time:C(Diet)[T.3],47.9,—,—,3.0,,,3.0
+Time:C(Diet)[T.4],30.3,—,—,7.0,,,7.0
+Group Var,39.0,—,—,5.0,,,5.0
+Group x Time Cov,47.5,9.3,94.7,4.0,4.5,3.5,4.0
+Time Var,53.6,9.3,94.7,2.0,4.5,3.5,3.3
+[subj] variability,—,100.0,72.4,,1.0,6.0,3.5
+[subj] last_obs,—,38.1,43.4,,2.0,8.0,5.0
+[subj] mean_weight,—,9.3,94.7,,4.5,3.5,4.0
+[subj] max_adjacent_change,—,1.0,65.2,,7.0,7.0,7.0
+[subj] first_obs,—,0.3,100.0,,8.5,1.0,4.8
+[subj] n_obs,—,0.3,0.0,,8.5,16.0,12.2
+[subj] Diet_3,—,0.0,21.3,,13.0,11.5,12.2
+[subj] Diet_4,—,0.0,21.6,,13.0,9.0,11.0
+[subj] Diet_2,—,0.0,21.1,,13.0,14.0,13.5
+[subj] Diet_1,—,0.0,15.3,,13.0,15.0,14.0

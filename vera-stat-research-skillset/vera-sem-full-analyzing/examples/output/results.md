@@ -1,0 +1,4 @@
+## Results
+
+The SEM converged successfully in N = 75 and showed good fit, chi-square(38) = 40.18, p = 0.374, CFI = 0.997, TLI = 0.995, RMSEA = 0.028 (90% CI [0.000, 0.087]), and SRMR = 0.056. Industrialization was positively associated with democracy in 1960 (b = 1.471, standardized = 0.448, p < .001), and democracy in 1960 was strongly associated with democracy in 1965 (b = 0.865, standardized = 0.884, p < .001). The direct path from industrialization to democracy in 1965 remained statistically significant (b = 0.600, standardized = 0.187, p = 0.008), consistent with partial mediation. The estimated indirect effect was 1.273 (p < .001), and the total effect was 1.873 (p < .001). The model explained 0.200 of the variance in democracy in 1960 and 0.965 of the variance in democracy in 1965.
+

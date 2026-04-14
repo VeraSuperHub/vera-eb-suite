@@ -1,0 +1,40 @@
+{
+  "outcome_type": "meta-analysis",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "supported_types": [
+      "SMD",
+      "MD",
+      "OR",
+      "RR",
+      "RD",
+      "ZCOR"
+    ],
+    "default": "SMD"
+  },
+  "heterogeneity": {
+    "i2_thresholds": {
+      "low": 25,
+      "moderate": 75
+    },
+    "tau2_estimator_primary": "REML",
+    "tau2_estimator_comparison": "FE"
+  },
+  "example_dataset": {
+    "type": "constructed",
+    "description": "10 studies comparing treatment vs control on a continuous outcome (SMD)",
+    "note": "NOT a built-in R dataset \u2014 create data frame with study_id, n_t, n_c, mean_t, mean_c, sd_t, sd_c"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

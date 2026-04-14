@@ -1,0 +1,4 @@
+Variable,Count Model (NegBin),RF Importance,LightGBM Importance,Rank Consensus
+tension_H,100.0,100.0,59.7,1.7
+tension_M,57.5,83.6,65.9,2.0
+wool_B,37.9,61.2,100.0,2.3

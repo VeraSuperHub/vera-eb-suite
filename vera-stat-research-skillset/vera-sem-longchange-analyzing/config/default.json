@@ -1,0 +1,44 @@
+{
+  "family": "sem",
+  "subtype": "longchange",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "primary_engine": "lavaan",
+  "secondary_engine": "nlpsem",
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "fit_indices": [
+    "chisq",
+    "df",
+    "cfi",
+    "tli",
+    "rmsea",
+    "srmr"
+  ],
+  "candidate_models": [
+    "linear_growth",
+    "latent_basis_growth",
+    "quadratic_growth",
+    "latent_change_score",
+    "parallel_process"
+  ],
+  "minimum_waves_for_nonlinear": 4,
+  "manuscript": {
+    "style": "APA7",
+    "decimal_places_stats": 2,
+    "decimal_places_p": 3,
+    "decimal_places_effect": 3
+  },
+  "code_style_variation": {
+    "enabled": true,
+    "dimensions": 7,
+    "spec": "reference/specs/code-style-variation.md"
+  },
+  "output_variation": {
+    "enabled": true,
+    "protocol": "reference/specs/output-variation-protocol.md",
+    "sentence_bank": "reference/patterns/sentence-bank.md"
+  }
+}

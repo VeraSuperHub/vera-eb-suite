@@ -1,0 +1,66 @@
+{
+  "outcome_type": "meta-analysis",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "heterogeneity_thresholds": {
+    "low": 25,
+    "moderate": 75,
+    "high_above": 75
+  },
+  "estimation_methods": {
+    "primary": "REML",
+    "comparison": [
+      "FE",
+      "DL",
+      "REML",
+      "KNHA"
+    ],
+    "bayesian": true,
+    "three_level": "if_applicable"
+  },
+  "publication_bias": {
+    "funnel_plot": true,
+    "egger_test": true,
+    "begg_test": true,
+    "trim_and_fill": true
+  },
+  "sensitivity": {
+    "leave_one_out": true,
+    "influence_diagnostics": true,
+    "cumulative": true,
+    "cooks_d_threshold": "4/k"
+  },
+  "moderator_analysis": {
+    "min_k_per_subgroup": 2,
+    "min_k_for_metareg": 10,
+    "max_moderators_ratio": 10
+  },
+  "manuscript": {
+    "style": "APA7",
+    "prisma": true,
+    "decimal_places_es": 2,
+    "decimal_places_p": 3,
+    "decimal_places_isq": 1,
+    "decimal_places_tau": 2
+  },
+  "code_style_variation": {
+    "enabled": true,
+    "dimensions": 7,
+    "spec": "reference/specs/code-style-variation.md"
+  },
+  "output_variation": {
+    "enabled": true,
+    "protocol": "reference/specs/output-variation-protocol.md",
+    "sentence_bank": "reference/patterns/sentence-bank.md"
+  }
+}

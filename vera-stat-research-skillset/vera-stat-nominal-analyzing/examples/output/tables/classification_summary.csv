@@ -1,0 +1,6 @@
+Model,Accuracy,setosa_Prec,setosa_Rec,versicolor_Prec,versicolor_Rec,virginica_Prec,virginica_Rec
+Multinomial Logistic,98.7%,1.00,1.00,0.98,0.98,0.98,0.98
+LDA,98.0%,1.00,1.00,0.98,0.96,0.96,0.98
+CART,99.3%,1.00,1.00,0.98,1.00,1.00,0.98
+Random Forest,100.0%,1.00,1.00,1.00,1.00,1.00,1.00
+LightGBM,100.0%,1.00,1.00,1.00,1.00,1.00,1.00

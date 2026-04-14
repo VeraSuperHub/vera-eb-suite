@@ -1,0 +1,30 @@
+{
+  "family": "sem",
+  "subtype": "cfa",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "primary_engine": "lavaan",
+  "secondary_engine": "semopy",
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "fit_indices": [
+    "chisq",
+    "df",
+    "cfi",
+    "tli",
+    "rmsea",
+    "srmr"
+  ],
+  "robust_fit_indices": true,
+  "loading_cutoffs": {
+    "salient": 0.5,
+    "minimum": 0.4
+  },
+  "example_dataset": {
+    "R": "lavaan::HolzingerSwineford1939",
+    "Python": "semopy.examples.holzinger39"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

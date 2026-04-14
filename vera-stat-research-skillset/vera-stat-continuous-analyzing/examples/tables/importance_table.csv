@@ -1,0 +1,4 @@
+"variable","OLS_beta","RF","GBM","Consensus_Rank"
+"dose",100,100,100,1
+"supp_vc",84.7,52,17.8,2
+"dose_x_supp",58.6,62.1,5.8,3

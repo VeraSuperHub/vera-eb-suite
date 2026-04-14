@@ -1,0 +1,38 @@
+{
+  "outcome_type": "survival",
+  "censoring_type": "right",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "landmark_times": [
+    365,
+    730,
+    1095
+  ],
+  "landmark_labels": [
+    "1-year",
+    "2-year",
+    "3-year"
+  ],
+  "ph_test_alpha": 0.05,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "censoring_warnings": {
+    "high_censoring_threshold": 0.8,
+    "low_censoring_threshold": 0.05
+  },
+  "example_dataset": {
+    "R": "survival::lung",
+    "Python": "from lifelines.datasets import load_lung"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

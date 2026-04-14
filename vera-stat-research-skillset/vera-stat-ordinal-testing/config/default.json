@@ -1,0 +1,33 @@
+{
+  "outcome_type": "ordinal",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "sparse_level_threshold": 5,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "two_groups": "rank_biserial_r",
+    "three_plus_omnibus": "epsilon_squared",
+    "three_plus_pairwise": "cliffs_delta"
+  },
+  "descriptive_stats": {
+    "central_tendency": "median",
+    "spread": "IQR",
+    "proportions_decimals": 1
+  },
+  "example_dataset": {
+    "R": "vcd::Arthritis",
+    "Python": "reconstruct from R (Improvement: None/Some/Marked; Treatment, Sex, Age)"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

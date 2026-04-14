@@ -1,0 +1,4 @@
+"Method","Unique_Insight"
+"OLS","Dose dominates the linear model, with interpretable interaction terms and confidence intervals."
+"Quantile Regression","Dose effect remains positive across quantiles (Q25 = 10.01, Q75 = 5.80)."
+"Tree-Based (RF/GBM)","Nonparametric importance also ranks dose and supp_vc highest."

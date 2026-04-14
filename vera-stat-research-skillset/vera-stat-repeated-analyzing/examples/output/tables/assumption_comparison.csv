@@ -1,0 +1,6 @@
+Method,Sphericity,Balanced,Missing_Data,Individual_Trajectories,Distributional
+RM-ANOVA / Mixed ANOVA,Required,Required,Complete cases,No,Normal residuals
+LMM random intercept,Not needed,Relaxed,MAR,Intercepts differ,Normal residuals + RE
+LMM random slope,Not needed,Relaxed,MAR,Intercepts + slopes differ,Normal residuals + RE
+GEE,Not needed,Relaxed,MCAR (or weighted),No (population-averaged),None (robust SE)
+Tree-based,N/A,N/A,Subject-level only,Via engineered features,None

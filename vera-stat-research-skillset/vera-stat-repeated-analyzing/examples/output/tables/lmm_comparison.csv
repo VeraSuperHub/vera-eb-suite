@@ -1,0 +1,5 @@
+Model,AIC,BIC,LogLik,Notes
+Random intercept,,,-2733.5,Baseline
+Random slope,,,-2390.8,"LR test: chi2=685.38, p=< .001"
+Growth curve (quad),,,-2324.8,Quadratic time
+Growth curve (cubic),,,-2333.1,Cubic time

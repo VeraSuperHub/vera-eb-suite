@@ -1,0 +1,131 @@
+{
+  "outcome_type": "survival",
+  "censoring_type": "right",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "landmark_times": [
+    365,
+    730,
+    1095
+  ],
+  "landmark_labels": [
+    "1-year",
+    "2-year",
+    "3-year"
+  ],
+  "ph_test_alpha": 0.05,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "censoring_warnings": {
+    "high_censoring_threshold": 0.8,
+    "low_censoring_threshold": 0.05
+  },
+  "subgroup_min_n": 5,
+  "cox_settings": {
+    "ties_method": "efron",
+    "ph_test": "schoenfeld",
+    "global_tests": [
+      "likelihood_ratio",
+      "wald",
+      "score"
+    ]
+  },
+  "time_varying_cox": {
+    "enabled": false,
+    "note": "Enable when at least one covariate changes value during follow-up. Requires start-stop interval data.",
+    "data_prep": {
+      "R_function": "survival::tmerge",
+      "Python_class": "lifelines.CoxTimeVaryingFitter"
+    }
+  },
+  "recurring_events": {
+    "enabled": false,
+    "model_type": "AG",
+    "model_options": [
+      "AG",
+      "PWP",
+      "frailty"
+    ],
+    "AG": {
+      "description": "Andersen-Gill model: treats events as independent, robust SE via cluster(id)",
+      "robust_se": true
+    },
+    "PWP": {
+      "description": "Prentice-Williams-Peterson: stratified by event number",
+      "time_scale": "gap",
+      "time_scale_options": [
+        "gap",
+        "total"
+      ],
+      "robust_se": true
+    },
+    "frailty": {
+      "description": "Frailty model: random effect for subject-level heterogeneity",
+      "distribution": "gamma",
+      "distribution_options": [
+        "gamma",
+        "gaussian"
+      ]
+    },
+    "python_supported": false,
+    "python_note": "lifelines does not natively support recurrent events; R recommended"
+  },
+  "aft_distributions": [
+    "weibull",
+    "lognormal",
+    "loglogistic"
+  ],
+  "rsf_settings": {
+    "n_trees": 500,
+    "importance": "permutation",
+    "min_node_size": 3,
+    "R_package": "randomForestSRC",
+    "Python_package": "scikit-survival"
+  },
+  "tree_models": {
+    "cart_method": "exp",
+    "rsf_n_trees": 500,
+    "gradient_boosting": {
+      "engine": "scikit-survival.GradientBoostingSurvivalAnalysis",
+      "n_estimators": 500,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "min_samples_leaf": "max(3, N // 10)",
+      "note": "LightGBM lacks native censoring support; use scikit-survival as primary, LightGBM with cox objective as alternative"
+    },
+    "lightgbm_alternative": {
+      "objective": "cox",
+      "n_estimators": 500,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "num_leaves": 15,
+      "min_child_samples": "max(3, N // 10)"
+    },
+    "small_n_threshold": 200
+  },
+  "manuscript": {
+    "style": "APA7",
+    "decimal_places_stats": 2,
+    "decimal_places_p": 3,
+    "decimal_places_hr": 2,
+    "decimal_places_tr": 2
+  },
+  "code_style_variation": {
+    "enabled": true,
+    "dimensions": 7,
+    "spec": "reference/specs/code-style-variation.md"
+  },
+  "output_variation": {
+    "enabled": true,
+    "protocol": "reference/specs/output-variation-protocol.md",
+    "sentence_bank": "reference/patterns/sentence-bank.md"
+  }
+}

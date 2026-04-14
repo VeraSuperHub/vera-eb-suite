@@ -1,0 +1,56 @@
+{
+  "family": "sem",
+  "subtype": "cfa",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "primary_engine": "lavaan",
+  "secondary_engine": "semopy",
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "fit_indices": [
+    "chisq",
+    "df",
+    "cfi",
+    "tli",
+    "rmsea",
+    "srmr"
+  ],
+  "reliability_metrics": [
+    "omega",
+    "composite_reliability",
+    "ave"
+  ],
+  "validity_metrics": [
+    "fornell_larcker",
+    "htmt"
+  ],
+  "invariance_sequence": [
+    "configural",
+    "metric",
+    "scalar"
+  ],
+  "decision_rules": {
+    "delta_cfi_max": 0.01,
+    "delta_rmsea_max": 0.015,
+    "delta_srmr_metric_max": 0.03,
+    "delta_srmr_scalar_max": 0.01
+  },
+  "manuscript": {
+    "style": "APA7",
+    "decimal_places_stats": 2,
+    "decimal_places_p": 3,
+    "decimal_places_effect": 3
+  },
+  "code_style_variation": {
+    "enabled": true,
+    "dimensions": 7,
+    "spec": "reference/specs/code-style-variation.md"
+  },
+  "output_variation": {
+    "enabled": true,
+    "protocol": "reference/specs/output-variation-protocol.md",
+    "sentence_bank": "reference/patterns/sentence-bank.md"
+  }
+}

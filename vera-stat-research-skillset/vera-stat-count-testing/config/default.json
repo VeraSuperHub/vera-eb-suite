@@ -1,0 +1,30 @@
+{
+  "outcome_type": "count",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "overdispersion_threshold": 1.5,
+  "zero_proportion_threshold": 0.2,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "primary": "irr",
+    "nonparametric_2group": "mann_whitney_u",
+    "nonparametric_3plus": "kruskal_wallis"
+  },
+  "example_dataset": {
+    "R": "warpbreaks",
+    "Python": "sm.datasets.get_rdataset('warpbreaks').data",
+    "offline_fallback": "examples/warpbreaks.csv"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

@@ -1,0 +1,31 @@
+{
+  "outcome_type": "nominal",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "sparse_level_threshold": 5,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "categorical_predictor": "cramers_v",
+    "continuous_predictor": "eta_squared"
+  },
+  "descriptive_stats": {
+    "report": "frequencies_and_proportions",
+    "rare_class_warning_threshold": 0.05
+  },
+  "example_dataset": {
+    "R": "iris",
+    "Python": "from sklearn.datasets import load_iris"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}

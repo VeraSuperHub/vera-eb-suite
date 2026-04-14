@@ -1,0 +1,5 @@
+DV,MANOVA_eta2,Discriminant,PCA_Loading,RF_Importance,Rank_Consensus
+sepal_length,65.7,80.4,89.8,18.7,3
+sepal_width,42.6,53.9,46.4,5.5,4
+petal_length,100.0,100.0,100.0,100.0,1
+petal_width,98.7,98.8,97.3,63.7,2

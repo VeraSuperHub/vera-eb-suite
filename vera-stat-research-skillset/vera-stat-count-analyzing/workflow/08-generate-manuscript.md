@@ -1,0 +1,117 @@
+# 08 — Generate Manuscript
+
+## Executor: Main Agent (assembly)
+
+## Data In: All code, prose, tables, plots, and style_vector from steps 04-07
+
+## Assemble methods.md
+
+### Structure (order fixed, content varies)
+
+```markdown
+## Methods
+
+### Statistical Analysis
+
+[Para 1: Count distribution assessment — overdispersion check, zero-inflation check, and why]
+[Para 2: Group comparison methods — which count model, why chosen, IRR as effect measure]
+[Para 3: Subgroup analysis methods — if applicable, interaction test approach]
+[Para 4: Count regression models — Poisson, NB, ZIP/ZINB, Hurdle — which were fit and why]
+[Para 5: Model selection — AIC-based distributional comparison, not horse-race framing]
+[Para 6: Tree-based — which models, exploratory framing, no split rationale]
+[Para 7: Software — R version, Python version, key packages with versions]
+```
+
+### Rules
+- Write as if a human analyst chose these methods for THIS specific study
+- Never expose general decision rules or pipeline logic
+- State what was done + why + key parameters
+- No results in methods; no code in methods
+- Cite methodological references where appropriate (Cameron & Trivedi for count models, etc.)
+- Follow `reference/rules/reporting-standards.md`
+
+### Quality: Methods variation
+Apply paragraph-level randomization per `reference/specs/output-variation-protocol.md`:
+- Each paragraph selects one framing from 3 options (test-first, purpose-first, data-first)
+- Vary passive vs active voice across paragraphs (not within)
+- Vary whether CI level and alpha are stated explicitly or implied
+
+## Assemble results.md
+
+### Section ordering logic
+
+Choose ONE ordering based on research question emphasis:
+- **Order A (hypothesis-driven):** Group comparison → Subgroup → Count models → Trees → Comparison
+- **Order B (model-driven):** Count models → Group comparison → Subgroup → Trees → Comparison
+- **Order C (exploratory-driven):** Distribution → Trees → Count models → Group comparison → Subgroup → Comparison
+
+Select: "is there a group difference in counts/rates" → A. "what predicts the count" → B. "what patterns exist" → C.
+
+### Rules
+- All statistics are final computed values (no placeholders)
+- Apply sentence bank rotation from `reference/patterns/sentence-bank.md`
+- Include 1-2 cross-references between sections where findings connect
+- Tables and figures referenced by number (actual files in tables/ and figures/)
+- Follow `reference/rules/reporting-standards.md`
+
+## Generate references.bib
+
+- Include ONLY references actually cited in methods.md or results.md
+- BibTeX format
+- Common count-specific references:
+  - Cameron & Trivedi (count regression)
+  - Hilbe (Negative Binomial regression)
+  - Vuong (model selection test)
+  - Lambert (zero-inflated Poisson)
+  - Mullahy (hurdle models)
+  - Software citations (R, Python, key packages)
+- Do NOT pad with uncited references
+
+## Apply code style variation
+
+Apply style_vector from step 06 to final code.R and code.py per `reference/specs/code-style-variation.md`.
+
+## Validation Checkpoint
+
+- [ ] methods.md contains no results or numbers
+- [ ] methods.md has 7 paragraphs covering all analysis steps
+- [ ] results.md section order matches research question type
+- [ ] results.md has no placeholder values — all numbers are computed
+- [ ] All table/figure references in text match actual files
+- [ ] IRR always reported with 95% CI
+- [ ] Overdispersion ratio reported
+- [ ] LR test (Poisson vs NB) reported if both models fit
+- [ ] Vuong test reported if ZIP/ZINB models fit
+- [ ] p-value formatting follows reporting-standards.md rules
+- [ ] references.bib includes all cited works and no uncited works
+- [ ] Code style variation applied to final code.R and code.py
+- [ ] No meta-commentary about pipeline structure in any output file
+- [ ] Sentence bank applied with no repeated phrasing patterns
+
+## Data Out → Final Deliverables
+
+```
+Deliverables:
+├── {outcome}_analysis.R          (PARTS 0-6, style-varied)
+├── {outcome}_analysis.py         (PARTS 0-6, style-varied)
+├── methods.md                    (manuscript Methods section)
+├── results.md                    (manuscript Results section)
+├── references.bib                (cited works only)
+├── tables/
+│   ├── poisson_table.csv
+│   ├── negbin_table.csv
+│   ├── zip_table.csv             (if applicable)
+│   ├── zinb_table.csv            (if applicable)
+│   ├── hurdle_table.csv
+│   ├── aic_comparison.csv
+│   ├── importance_table.csv
+│   └── comparison_table.csv
+└── figures/
+    ├── plot_01_count_distribution.png
+    ├── plot_02_mean_counts_[var].png
+    ├── plot_03_*.png             (additional test plots)
+    ├── plot_04_subgroup_*.png    (if applicable)
+    ├── plot_05_cart_tree.png
+    ├── plot_06_rf_importance.png
+    └── plot_07_irr_forest.png
+```

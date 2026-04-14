@@ -1,0 +1,18 @@
+{
+  "auto_proceed": true,
+  "gate1_timeout": 10,
+  "max_review_rounds": 4,
+  "reviewer_model": "gpt-5.4",
+  "reviewer_reasoning_effort": "xhigh",
+  "positive_threshold_score": 6,
+  "max_total_cpu_hours": 4,
+  "pilot_replications": 500,
+  "main_replications_coverage": 1000,
+  "main_replications_power": 5000,
+  "paper_improvement_rounds": 2,
+  "manuscript_format": "latex",
+  "state_file": "PIPELINE_STATE.json",
+  "stale_threshold_hours": 24,
+  "simulation_retry_max": 3,
+  "supported_languages": ["R", "Python"]
+}

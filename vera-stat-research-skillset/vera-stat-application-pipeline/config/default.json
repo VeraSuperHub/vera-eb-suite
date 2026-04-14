@@ -1,0 +1,30 @@
+{
+  "auto_proceed_timeout": 30,
+  "max_review_rounds": 4,
+  "max_parallel_tracks": 4,
+  "output_dir": "output",
+  "manuscript_formats": [
+    "markdown",
+    "latex"
+  ],
+  "default_alpha": 0.05,
+  "default_ci_level": 0.95,
+  "plot_dpi": 300,
+  "state_file": "PIPELINE_STATE.json",
+  "stale_threshold_hours": 24,
+  "lit_scan_timeout_minutes": 15,
+  "track_timeout_minutes": 30,
+  "reviewer_model": "gpt-5.4",
+  "reviewer_reasoning_effort": "xhigh",
+  "positive_threshold_score": 6,
+  "supported_data_formats": [
+    "csv",
+    "xlsx",
+    "xls",
+    "rds",
+    "sav",
+    "dta",
+    "tsv",
+    "parquet"
+  ]
+}

@@ -1,0 +1,7 @@
+Decision,Sensitivity
+FE vs RE,Same direction: Yes; Both significant: Yes
+DL vs REML estimator,tau2 difference: 0.0510 (notable)
+Standard vs Knapp-Hartung,CI widened by -0.20 (materially)
+Frequentist vs Bayesian,Estimate difference: 0.002 (consistent)
+Before vs after trim-fill,ES shifted by 0.000 (minimally)
+With vs without influential study,ES range on leave-one-out: -0.675 to -0.641

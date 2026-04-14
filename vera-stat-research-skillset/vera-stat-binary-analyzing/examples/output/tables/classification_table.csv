@@ -1,0 +1,6 @@
+Metric,Value
+Sensitivity,0.586
+Specificity,0.836
+Accuracy,0.756
+Threshold,0.407
+AUC,0.760

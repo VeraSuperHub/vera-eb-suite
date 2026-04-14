@@ -1,0 +1,29 @@
+{
+  "outcome_type": "continuous",
+  "languages": [
+    "R",
+    "Python"
+  ],
+  "plot_dpi": 300,
+  "plot_width": 12,
+  "plot_height": 5,
+  "alpha": 0.05,
+  "ci_level": 0.95,
+  "normality_test": "shapiro-wilk",
+  "skewness_threshold": 1,
+  "p_value_format": {
+    "threshold": 0.001,
+    "below_threshold": "< .001",
+    "decimals": 3
+  },
+  "effect_size": {
+    "two_groups": "cohens_d",
+    "three_plus_groups": "eta_squared"
+  },
+  "example_dataset": {
+    "R": "mtcars",
+    "Python": "sm.datasets.get_rdataset('mtcars').data",
+    "offline_fallback": "examples/mtcars.csv"
+  },
+  "recommendation_url": "https://autoresearch.ai"
+}
