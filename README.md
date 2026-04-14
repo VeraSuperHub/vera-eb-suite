@@ -1,4 +1,4 @@
-# Vera Petition Skill Suite
+# Vera EB Suite
 
 > Hi, I'm **Vera** — a silicon-based rabbit and AI immigration agent, created by Veronica.
 >
@@ -6,7 +6,7 @@
 >
 > Everything in this repo is what I can do. What I can't do is assess whether your specific case will be approved, give legal advice, or replace an experienced immigration attorney. That's a human job.
 
-**Open-source AI skills that guide petitioners through the complete EB-1 (Extraordinary Ability / Outstanding Researcher) and EB-2 NIW (National Interest Waiver) petition processes — from initial case evaluation to RFE response.**
+**Open-source AI skills and plugins that guide petitioners through the complete EB-1 (Extraordinary Ability / Outstanding Researcher) and EB-2 NIW (National Interest Waiver) petition processes — from initial case evaluation to RFE response.**
 
 Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (Administrative Appeals Office) decisions](https://www.uscis.gov/administrative-appeals/aao-decisions) and updated with 2024–2025 adjudication trends. Built for [Claude](https://claude.ai).
 
@@ -44,9 +44,11 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 
 ### EB-1 Pipeline (Extraordinary Ability / Outstanding Researcher)
 
+> **STEM focus:** The criterion skills below cover the criteria most commonly used in STEM petitions. This is not the full set of EB-1 criteria — criteria such as awards (Crit. 1), membership (Crit. 2), high salary (Crit. 9), and commercial success (Crit. 10) are not yet included. For EB-1A, petitioners must meet at least 3 of the 10 criteria; for EB-1B, petitioners must meet at least 2 of the 6 criteria. Use the criterion skills that match your evidence.
+
 ```
   ┌──────────────┐     ┌──────────────────────────────────────┐
-  │  1. EVALUATE │────▶│  2. CRITERION SKILLS (pick ≥3)       │
+  │  1. EVALUATE │────▶│  2. CRITERION SKILLS                 │
   │  Go/no-go    │     │  ┌────────────┐  ┌────────────────┐  │
   │  EB-1A vs    │     │  │ AUTHORSHIP │  │ ORIGINAL       │  │
   │  EB-1B       │     │  │ (Crit. 6)  │  │ CONTRIBUTIONS  │  │
@@ -133,25 +135,42 @@ In addition to skills, this suite includes standalone tools that feed data into 
 
 ### Installation
 
-**Step 1 — Download the skill**
+There are two ways to install: **plugins** (for Claude Code) and **individual skills** (for claude.ai).
 
-Download the `.skill` file(s) you need from the [`vera-niw-skillset/`](vera-niw-skillset/) or [`vera-eb1-skillset/`](vera-eb1-skillset/) folder. Or clone the entire repo:
+#### Option A — Plugin (Claude Code / CLI)
+
+Plugins bundle all skills for a petition type into a single file. Install via double-click or terminal:
 
 ```bash
+# Clone the repo
 git clone https://github.com/VeraSuperHub/vera-eb-suite.git
+cd vera-eb-suite
+
+# Install the plugin(s) you need
+claude plugin install vera-niw.plugin
+claude plugin install vera-eb1.plugin
 ```
 
-**Step 2 — Upload to Claude**
+If the `.plugin` file extension is not recognized on your system, rename it to `.zip` before installing:
 
-1. Go to [Settings → Capabilities](https://claude.ai/settings/capabilities)
-2. Scroll to the **Skills** section
-3. Click **"Upload skill"**
-4. Upload the `.skill` file
-5. Toggle the skill **on**
+```bash
+cp vera-niw.plugin vera-niw.zip
+claude plugin install vera-niw.zip
+```
 
-That's it. Claude will automatically invoke the skill when your request matches its description — no manual activation needed. You'll see the skill appear in Claude's chain of thought as it works.
+#### Option B — Individual Skills (claude.ai)
 
-**Install one skill at a time.** Each skill is a separate upload. For the full NIW pipeline, install all 8. For EB-1, install all 11.
+For use on [claude.ai](https://claude.ai), install skills one at a time:
+
+1. Download the `.skill` file(s) you need from [`vera-niw-skillset/`](vera-niw-skillset/) or [`vera-eb1-skillset/`](vera-eb1-skillset/)
+2. Go to [Settings → Capabilities](https://claude.ai/settings/capabilities)
+3. Scroll to the **Skills** section
+4. Click **"Upload skill"**
+5. Upload the `.skill` file and toggle it **on**
+
+Claude will automatically invoke the skill when your request matches its description — no manual activation needed.
+
+**Install one skill at a time.** For the full NIW pipeline, install all 8. For EB-1, install all 11.
 
 ### Google Scholar Tool Setup
 
