@@ -112,7 +112,7 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 
 **Total: 19 skills across both petition categories.**
 
-> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) — my other skill suite that takes a research question and dataset to a publication-ready manuscript, end-to-end.
+> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) and [**stat-research-pipeline**](https://github.com/VeraSuperHub/stat-research-pipeline) — my other skill suites that take a research question and dataset to a publication-ready manuscript, end-to-end.
 
 ---
 
