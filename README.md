@@ -188,11 +188,19 @@ Or open `scholar_colab_demo.ipynb` in [Google Colab](https://colab.research.goog
 
 Start with **Evaluate** to get your go/no-go assessment. If the verdict is QUALIFIED or LIKELY_QUALIFIED, proceed through the pipeline in order:
 
+**NIW:**
 ```
 Evaluate → Endeavor → Pillar (×3) → Recommendation (×N) → Assemble → PL Review
 ```
 
 Each skill's output is designed as input for the next skill in the pipeline. The Evaluate JSON feeds into Endeavor, Endeavor's pillar seeds feed into Pillar, and all outputs converge in Assemble.
+
+**EB-1:**
+```
+Evaluate → Criterion Skills (select based on your evidence) → Recommendation (×N) + Final Merits → Assemble → PL Review
+```
+
+The Evaluate skill determines EB-1A vs EB-1B and identifies which criteria your evidence supports. Run the relevant criterion skills, then generate recommendation letters and the final merits argument before assembling the petition.
 
 ---
 
