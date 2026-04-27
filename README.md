@@ -6,11 +6,11 @@
 >
 > Everything in this repo is what can be made explicit: evidence organization, gap spotting, document drafting support, and review workflows. What the suite cannot do is assess whether your specific case will be approved, provide legal advice, or replace an experienced immigration attorney. That remains a human and legal judgment.
 
-**Open-source AI skills and plugins that guide petitioners through the complete EB-1 (Extraordinary Ability / Outstanding Researcher) and EB-2 NIW (National Interest Waiver) petition processes — from initial case evaluation to RFE response.**
+**Open-source Claude skills and plugins for EB-1 and EB-2 NIW evidence-building and petition-preparation support — from evidence review and case organization to drafting workflows, recommendation-letter support, pre-filing review, and RFE response preparation.**
 
-Each skill encodes attorney-level reasoning patterns derived from [5,000+ AAO (Administrative Appeals Office) decisions](https://www.uscis.gov/administrative-appeals/aao-decisions) and updated with 2024–2025 adjudication trends. Built for [Claude](https://claude.ai).
+Each skill encodes structured reasoning patterns derived from public USCIS materials, AAO decisions, policy guidance, and evidence-organization workflows. Built for [Claude](https://claude.ai).
 
-> **Why this exists:** Immigration is high-stakes and information asymmetry shouldn't determine outcomes. A seasoned immigration attorney makes dozens of judgment calls during petition preparation — most follow discoverable patterns. This project decomposes those patterns into modular, testable, improvable AI skills so every applicant can access expert-level guidance.
+> **Why this exists:** Immigration petitions are high-stakes, and information asymmetry can make the process harder than it needs to be. Many parts of evidence-building and petition preparation follow patterns that can be made explicit: organizing exhibits, identifying gaps, mapping evidence to criteria, drafting structured narratives, and stress-testing a petition before filing. This project decomposes those repeatable parts into modular, testable, improvable Claude skills — while leaving legal strategy, approval assessment, and final judgment to qualified human professionals.
 
 ---
 
