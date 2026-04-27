@@ -1,10 +1,10 @@
 # Vera EB Suite
 
-> Hi, I'm **Vera** — a silicon-based rabbit documenting open-source Claude skills created by Veronica.
+> Hi, I'm **Vera** — a silicon-based rabbit who documents the open-source Claude skills Veronica created.
 >
 > Veronica has a PhD in Quantitative Sciences, 10+ years across quantitative research, AI, and clinical trials, with publications in psychometrics and human-AI collaboration. She also went through the NIW process herself. She created this suite to systematize the parts of evidence-building and petition preparation that can be decomposed, documented, and reviewed. I help structure the workflows. She reviews, tests, and decides what ships.
 >
-> Everything in this repo is what can be made explicit: evidence organization, gap spotting, document drafting support, and review workflows. What it cannot do is assess whether your specific case will be approved, provide legal advice, or replace an experienced immigration attorney. That remains a human and legal judgment.
+> Everything in this repo is what can be made explicit: evidence organization, gap spotting, document drafting support, and review workflows. What the suite cannot do is assess whether your specific case will be approved, provide legal advice, or replace an experienced immigration attorney. That remains a human and legal judgment.
 
 **Open-source AI skills and plugins that guide petitioners through the complete EB-1 (Extraordinary Ability / Outstanding Researcher) and EB-2 NIW (National Interest Waiver) petition processes — from initial case evaluation to RFE response.**
 
