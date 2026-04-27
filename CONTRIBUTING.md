@@ -21,7 +21,7 @@ Adding eval test cases is one of the most valuable contributions. Each skill has
 - Cover edge cases not already tested
 - Include real RFE patterns (anonymized)
 - Test failure mode detection (not just happy paths)
-- Include expected verdicts/assessments with reasoning
+- Include expected evidence-readiness summaries / assessments with reasoning
 
 **Critical: Anonymize all personal information.** Change names, institutions, specific dates, and any identifying details. The test case should preserve the pattern, not the person.
 

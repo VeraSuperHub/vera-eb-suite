@@ -107,7 +107,7 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 | 5 | `vera-eb1-critical-role` | Criterion 8: leading or critical role in distinguished organizations |
 | 6 | `vera-eb1-published-material` | Criterion 3: published material about the petitioner in professional or major media |
 | 7 | `vera-eb1-recommendation` | Generates EB-1 reference letters from a recommender's perspective |
-| 8 | `vera-eb1-final-merits` | Kazarian Step 2: final merits determination arguing sustained national/international acclaim |
+| 8 | `vera-eb1-final-merits` | Kazarian Step 2: final-merits argument drafting support — organizes sustained-acclaim evidence, criteria-level outputs, impact signals, and narrative risks for human review |
 | 9 | `vera-eb1-assemble` | Assembles a review-ready EB-1 petition-letter draft as a formatted .docx |
 | 10 | `vera-eb1-pl-review` | Adversarial pre-filing review using the Kazarian two-step analytical framework |
 | 11 | `vera-eb1-rfe-response` | Drafts a structured EB-1 RFE response framework with evidence mapping and potential rebuttal patterns for human review |
@@ -188,7 +188,7 @@ Or open `scholar_colab_demo.ipynb` in [Google Colab](https://colab.research.goog
 
 ### Recommended Workflow
 
-Start with **Evaluate** to get your evidence-readiness summary. If the readiness tier is QUALIFIED or LIKELY_QUALIFIED, proceed through the pipeline in order:
+Start with **Evaluate** to get your evidence-readiness summary. If the readiness tier is STRONG_EVIDENCE or WORKABLE_EVIDENCE, proceed through the pipeline in order:
 
 **NIW:**
 ```
@@ -208,16 +208,18 @@ The Evaluate skill determines EB-1A vs EB-1B and identifies which criteria your 
 
 ## Usage Examples
 
-**Evaluate — Am I qualified?**
+**Evaluate — How strong is my evidence?**
 ```
 I'm a senior data scientist at a Fortune 500 company with 5 years of experience.
 I have 3 publications (12 citations total), 2 patents pending, and my fraud
-detection system processes 2M+ transactions daily. Evaluate my NIW case.
+detection system processes 2M+ transactions daily. Review my NIW evidence
+readiness.
 ```
 
 **Endeavor — Define the proposed endeavor:**
 ```
-I just completed NIW_Evaluate and got LIKELY_QUALIFIED. Here's my JSON output:
+I just completed vera-niw-evaluate and got a WORKABLE_EVIDENCE readiness tier.
+Here's my JSON output:
 [paste evaluate output]
 Help me draft my proposed endeavor.
 ```
