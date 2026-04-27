@@ -2,7 +2,7 @@
 
 ## Not Legal Advice
 
-The NIW Skill Suite and all associated tools, documents, and outputs are provided for **informational and educational purposes only**. Nothing in this repository constitutes legal advice, immigration counsel, or a professional attorney-client relationship.
+The Vera EB Suite (covering EB-1 and EB-2 NIW skills) and all associated tools, documents, and outputs are provided for **informational and educational purposes only**. Nothing in this repository constitutes legal advice, immigration counsel, or a professional attorney-client relationship. The skills are evidence-readiness and drafting-support workflows; they do not assess approval chances and do not replace case-specific judgment from a qualified immigration attorney.
 
 ## No Guarantee of Outcome
 
@@ -14,7 +14,7 @@ If you are preparing an EB-2 National Interest Waiver (NIW) petition or any othe
 
 ## Accuracy and Currency
 
-While these tools are built on analysis of 5,000+ AAO decisions and the Dhanasar framework, immigration law and policy change frequently. The authors do not guarantee that the information encoded in these skills is current, complete, or accurate for any specific case.
+These skills encode structured reasoning patterns derived from public USCIS materials, AAO decisions, and policy guidance (including the Dhanasar framework for NIW and the Kazarian two-step framework for EB-1). Immigration law and policy change frequently. The authors do not guarantee that the information encoded in these skills is current, complete, or accurate for any specific case.
 
 ## Limitation of Liability
 

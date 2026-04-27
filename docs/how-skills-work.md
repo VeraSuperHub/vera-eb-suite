@@ -1,40 +1,40 @@
-# How Skills Work: Turning Expert Judgment into AI-Executable Units
+# How Skills Work: Decomposing Workflows into Reviewable Units
 
 ## The Problem
 
-Every domain has experts who make fast, accurate judgment calls that novices can't replicate. An experienced NIW attorney reads a petition letter and knows in minutes whether it will trigger an RFE. A senior statistician glances at an experimental design and spots the fatal flaw. A seasoned editor reads a paragraph and knows exactly why it sounds like AI wrote it.
+Many domains contain workflow steps that follow discoverable patterns — evidence that tends to be persuasive, narrative structures that hold up under scrutiny, common gaps that reviewers flag. An experienced reader of NIW petition letters can quickly point to passages that commonly trigger RFEs. A senior statistician can flag designs that won't survive review. These pattern judgments are valuable — but they're not the same as case-specific legal or scientific judgment, which still requires a qualified human.
 
-This expertise isn't magic. It's pattern recognition built from hundreds or thousands of cases. The patterns are discoverable, describable, and — crucially — encodable.
+The patterns themselves are discoverable, describable, and — crucially — encodable as structured workflows.
 
 ## The Insight
 
-Expert judgment decomposes into three layers:
+Workflow patterns decompose into three layers:
 
-**Layer 1: Domain Knowledge.** Facts, rules, frameworks. For NIW: the Dhanasar three-prong test, USCIS policy memoranda, AAO decision patterns. This is the easiest layer to encode — it's already written down somewhere.
+**Layer 1: Public Domain Knowledge.** Facts, rules, frameworks. For NIW: the Dhanasar three-prong test, USCIS Policy Manual sections, public AAO decisions. For EB-1: the Kazarian two-step framework and 8 CFR 204.5(h) criteria. This layer is sourced from public materials.
 
-**Layer 2: Decision Heuristics.** The if-then rules experts apply unconsciously. "If the endeavor statement describes a job rather than an undertaking, it will fail Prong 1." "If a recommendation letter uses the phrase 'to whom it may concern,' it signals the recommender doesn't actually know the petitioner." These rules live in experts' heads and rarely get written down.
+**Layer 2: Pattern Heuristics.** The recurring "if X is missing, reviewers commonly flag Y" patterns visible in public AAO reasoning and policy guidance. "If the endeavor statement describes a job rather than an undertaking, it commonly fails Prong 1 review." "If a recommendation letter parrots regulatory language, it weakens credibility." These are pattern observations, not legal conclusions.
 
-**Layer 3: Calibration.** Knowing when a case is borderline vs. clearly strong vs. clearly weak. This requires exposure to the full distribution of cases — not just the extremes. Calibration is the hardest layer to encode because it requires representative examples, not just rules.
+**Layer 3: Calibration.** Distinguishing thin / workable / strong evidence postures. This requires exposure to a wide range of public examples and reference cases. Calibration outputs are evidence-readiness summaries for human review, not eligibility determinations.
 
 ## The Method
 
-A skill encodes all three layers into a structured AI instruction set:
+A skill encodes all three layers into a structured Claude instruction set:
 
 ### Step 1: Decompose
 
-Map every decision point in the workflow. For the NIW domain, this revealed a 7-step pipeline: evaluate → endeavor → pillar (×3) → recommendation → assemble → review → RFE response. Each step has its own decision rules, failure patterns, and quality criteria.
+Map every decision point in the workflow. For the NIW domain, this revealed a 7-step pipeline: evaluate → endeavor → pillar (×3) → recommendation → assemble → review → RFE response. Each step has its own structured rubric, common-weakness checks, and review criteria.
 
 ### Step 2: Encode as Rubric
 
-Convert decision heuristics into explicit scoring criteria. Don't say "the endeavor should be specific" — say "the endeavor must contain a proper-noun project name, a named methodology, and a quantified national outcome." Rubrics eliminate ambiguity.
+Convert pattern heuristics into explicit, reviewable criteria. Don't say "the endeavor should be specific" — say "the endeavor draft should contain a proper-noun project name, a named methodology, and a quantified national outcome; if any are missing, flag for human revision." Rubrics make output reviewable.
 
 ### Step 3: Add Reference Material
 
-Layer 1 knowledge goes into `references/` files that the skill can consult. For NIW PL Review, this includes USCIS RFE language patterns, publication diligence rules, EB-2 eligibility criteria, and the full Dhanasar analytical framework. For NIW Evaluate, this includes field alignment rubrics and example outputs at each qualification tier.
+Layer 1 knowledge goes into `references/` files that the skill can consult. For NIW PL Review, this includes USCIS RFE language patterns, publication diligence rules, EB-2 eligibility criteria from the USCIS Policy Manual, and the Dhanasar analytical framework. For NIW Evaluate, this includes field-alignment rubrics and example outputs at each evidence-readiness posture.
 
 ### Step 4: Validate with Test Cases
 
-Every skill includes `evals/` — test inputs with expected outputs. These serve two purposes: verifying the skill works correctly, and documenting edge cases the skill must handle. If you can't write a test case for a decision rule, the rule isn't specific enough.
+Every skill includes `evals/` — test inputs with expected outputs. These verify the skill behaves consistently on representative cases and document edge cases. If you can't write a test case for a rule, the rule isn't specific enough.
 
 ### Step 5: Pipeline Integration
 
@@ -42,7 +42,7 @@ Individual skills are useful. A connected pipeline is transformative. Each skill
 
 ### Step 6: Iterate
 
-Real users find failure modes you didn't anticipate. Every bug report is a missing decision rule. Every unexpected output is a calibration gap. The skill improves the same way expert judgment improves — through exposure to more cases.
+Real users find failure modes you didn't anticipate. Every bug report is a missing rubric step. Every unexpected output is a calibration gap. Skills improve through exposure to more public cases and review feedback.
 
 ## The Architecture
 
@@ -60,23 +60,23 @@ This structure is intentionally simple. A skill is a text file, not a software s
 
 ## Applying This to Other Domains
 
-The NIW domain is the first complete implementation — 8 skills covering the entire petition lifecycle. The same methodology applies wherever expert judgment follows discoverable patterns:
+NIW and EB-1 are the first complete implementations — 19 skills covering most of the evidence-building and petition-preparation workflow. The same methodology applies wherever decomposable, reviewable workflow patterns exist alongside human judgment that should not be automated:
 
-| Domain | Layer 1 (Knowledge) | Layer 2 (Heuristics) | Layer 3 (Calibration) |
-|---|---|---|---|
-| **NIW Petitions** | Dhanasar framework, AAO decisions | 10 denial patterns (A–J), 8 rebuttal patterns (R1–R8) | 31 eval test cases across tiers |
-| **Academic Peer Review** | Journal standards, field norms | Common rejection reasons, methodology red flags | Accept/revise/reject distribution |
-| **Regulatory Compliance** | Statute text, agency guidance | Violation patterns, audit triggers | Severity scoring by precedent |
-| **Clinical Diagnostics** | Diagnostic criteria, treatment protocols | Differential diagnosis heuristics | Probability calibration by presentation |
+| Domain | Layer 1 (Public knowledge) | Layer 2 (Pattern heuristics) | Layer 3 (Calibration) | Layer that stays human |
+|---|---|---|---|---|
+| **NIW petitions** | Dhanasar framework, USCIS Policy Manual, AAO decisions | Common evidence weaknesses, narrative-risk patterns | Evidence-readiness postures | Case-specific legal eligibility, approval assessment |
+| **EB-1 petitions** | Kazarian framework, 8 CFR 204.5(h)/(i), AAO decisions | Criterion-mapping patterns, sustained-acclaim signals | Evidence-readiness postures | Case-specific legal eligibility, approval assessment |
+| **Statistical research** | Method assumptions, reporting standards | Common analytical pitfalls | Effect-size and uncertainty framing | Substantive interpretation, claim validity |
+| **AI/ML research** | Benchmark norms, evaluation standards | Common comparison and reporting flaws | Empirical posture framing | Scientific claim validity, novelty judgment |
 
 To build a skill for a new domain:
 
-1. Find the expert whose judgment you want to encode
-2. Map their decision process (Step 1)
-3. Extract the heuristics they can't easily articulate (Step 2)
-4. Gather the reference material they consult (Step 3)
+1. Identify the workflow patterns that are repeatable and reviewable — not the judgment that must stay human
+2. Map the decision points (Step 1)
+3. Extract the pattern heuristics from public materials (Step 2)
+4. Gather reference material (Step 3)
 5. Collect representative cases at each quality tier (Step 4)
 6. Design the pipeline — what feeds what (Step 5)
 7. Ship it, then iterate on real user feedback (Step 6)
 
-The question isn't whether expertise can be decomposed into AI-executable units. It's which domain gets decomposed next.
+The question isn't whether workflow patterns can be decomposed into reviewable units. It's where the line between execution and judgment belongs.

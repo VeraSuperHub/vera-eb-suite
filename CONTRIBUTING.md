@@ -1,12 +1,12 @@
-# Contributing to NIW Skill Suite
+# Contributing to Vera EB Suite
 
-Thanks for your interest in improving NIW petition guidance for everyone.
+Thanks for your interest in improving evidence-building and petition-preparation support for EB-1 and EB-2 NIW filers.
 
 ## How to Contribute
 
 ### Bug Reports
 
-If a skill produced incorrect or misleading guidance, open an issue with:
+If a skill produced incorrect or misleading drafting/review output, open an issue with:
 
 1. Which skill was involved
 2. The type of input you provided (anonymize all personal information)
@@ -29,7 +29,7 @@ Adding eval test cases is one of the most valuable contributions. Each skill has
 
 - New AAO decisions that establish or modify adjudication patterns
 - USCIS Policy Manual updates
-- Adjudication trend data (approval rates, RFE patterns)
+- Public adjudication trend context (approval-rate background, RFE patterns) — used for conservative framing only, not for approval-probability prediction
 - Field-specific framing examples
 
 ### Skill Improvements

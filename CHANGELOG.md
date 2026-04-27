@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the NIW Skill Suite will be documented in this file.
+All notable changes to the Vera EB Suite (EB-1 + EB-2 NIW skills) will be documented in this file.
 
 ## [2.0.0] - 2026-03-08
 
@@ -13,7 +13,7 @@ All notable changes to the NIW Skill Suite will be documented in this file.
 - Recommendation letter authenticity checklist (font consistency, no regulatory parroting)
 - Government Agency Letter type (Type G) in vera-niw-recommendation
 - Jan 2025 USCIS Policy Manual updates: occupation-level EB-2 gate, experience-specialty match
-- FY 2024 approval rate context (79.99% → 43.31%) calibration across all skills
+- FY 2024 public adjudication trend context (NIW approval-rate background 79.99% → 43.31%) used as conservative framing for evidence-readiness summaries; not used for approval-probability prediction
 - Standalone deployable prompt for vera-niw-pl-review (works with any LLM API)
 - 31 eval test cases across all 8 skills
 
@@ -33,4 +33,4 @@ All notable changes to the NIW Skill Suite will be documented in this file.
 - 10 denial pattern checks (A–J) in pl-review
 - 8 rebuttal patterns (R1–R8) in rfe-response
 - Output schemas for evaluate and pillar
-- Example outputs for evaluate (qualified, borderline, not_qualified)
+- Example outputs for evaluate (strong / workable / thin / very-thin evidence-readiness summaries)

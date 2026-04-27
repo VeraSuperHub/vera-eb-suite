@@ -10,6 +10,8 @@
 
 Each skill encodes structured reasoning patterns derived from public USCIS materials, AAO decisions, policy guidance, and evidence-organization workflows. Built for [Claude](https://claude.ai).
 
+> _Across [VeraSuperHub](https://github.com/VeraSuperHub), Vera structures execution; humans own judgment._
+
 > **Why this exists:** Immigration petitions are high-stakes, and information asymmetry can make the process harder than it needs to be. Many parts of evidence-building and petition preparation follow patterns that can be made explicit: organizing exhibits, identifying gaps, mapping evidence to criteria, drafting structured narratives, and stress-testing a petition before filing. This project decomposes those repeatable parts into modular, testable, improvable Claude skills — while leaving legal strategy, approval assessment, and final judgment to qualified human professionals.
 
 ---
@@ -21,17 +23,18 @@ Each skill encodes structured reasoning patterns derived from public USCIS mater
 ```
   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
   │  1. EVALUATE │────▶│ 2. ENDEAVOR  │────▶│  3. PILLAR   │
-  │  Go/no-go    │     │  Endeavor    │     │  ×3 runs     │
-  │  assessment  │     │  statement   │     │  (one per    │
-  │              │     │  + 3 pillar  │     │   pillar)    │
+  │  Evidence-   │     │  Endeavor    │     │  ×3 runs     │
+  │  readiness   │     │  statement   │     │  (one per    │
+  │  summary     │     │  + 3 pillar  │     │   pillar)    │
   └──────────────┘     │  seeds       │     └──────┬───────┘
                        └──────────────┘            │
                                                    ▼
     ┌─────────────┐     ┌─────────────┐     ┌──────────────┐
     │ 7. RFE      │     │ 6. PL       │◀────│ 5. ASSEMBLE  │
-    │ RESPONSE    │     │ REVIEW      │     │  Full .docx  │
-    │ (if needed) │     │ Adversarial │     │  petition    │
-    └─────────────┘     │ QA gate     │     └──────┬───────┘
+    │ RESPONSE    │     │ REVIEW      │     │  Review-     │
+    │ DRAFTING    │     │ Adversarial │     │  ready       │
+    │ SUPPORT     │     │ pre-filing  │     │  draft .docx │
+    └─────────────┘     │ check       │     └──────┬───────┘
                         └─────────────┘            │
                               ▲              ┌─────┴────────┐
                               └──────────────│ 4. RECOMMEND │
@@ -49,14 +52,14 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 ```
   ┌──────────────┐     ┌──────────────────────────────────────┐
   │  1. EVALUATE │────▶│  2. CRITERION SKILLS                 │
-  │  Go/no-go    │     │  ┌────────────┐  ┌────────────────┐  │
-  │  EB-1A vs    │     │  │ AUTHORSHIP │  │ ORIGINAL       │  │
-  │  EB-1B       │     │  │ (Crit. 6)  │  │ CONTRIBUTIONS  │  │
-  │              │     │  └────────────┘  │ (Crit. 5)      │  │
-  └──────────────┘     │  ┌────────────┐  └────────────────┘  │
-                       │  │ JUDGING    │  ┌────────────────┐  │
-                       │  │ (Crit. 4)  │  │ CRITICAL ROLE  │  │
-                       │  └────────────┘  │ (Crit. 8)      │  │
+  │  Evidence-   │     │  ┌────────────┐  ┌────────────────┐  │
+  │  readiness   │     │  │ AUTHORSHIP │  │ ORIGINAL       │  │
+  │  summary +   │     │  │ (Crit. 6)  │  │ CONTRIBUTIONS  │  │
+  │  pathway     │     │  └────────────┘  │ (Crit. 5)      │  │
+  │  framing     │     │  ┌────────────┐  └────────────────┘  │
+  │  (EB-1A /    │     │  │ JUDGING    │  ┌────────────────┐  │
+  │  EB-1B)      │     │  │ (Crit. 4)  │  │ CRITICAL ROLE  │  │
+  └──────────────┘     │  └────────────┘  │ (Crit. 8)      │  │
                        │  ┌────────────┐  └────────────────┘  │
                        │  │ PUBLISHED  │                      │
                        │  │ MATERIAL   │                      │
@@ -66,14 +69,16 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
                                           ▼
     ┌─────────────┐     ┌─────────────┐  ┌──────────────┐
     │ 6. RFE      │     │ 5. PL       │◀─│ 4. ASSEMBLE  │
-    │ RESPONSE    │     │ REVIEW      │  │  Full .docx  │
-    │ (if needed) │     │ Adversarial │  │  petition    │
-    └─────────────┘     │ QA gate     │  └──────┬───────┘
+    │ RESPONSE    │     │ REVIEW      │  │  Review-     │
+    │ DRAFTING    │     │ Adversarial │  │  ready       │
+    │ SUPPORT     │     │ pre-filing  │  │  draft .docx │
+    └─────────────┘     │ check       │  └──────┬───────┘
                         └─────────────┘         │
                               ▲           ┌─────┴────────┐
                               └───────────│ 3. RECOMMEND │
                                           │  + FINAL     │
                                           │  MERITS      │
+                                          │  DRAFTING    │
                                           └──────────────┘
 ```
 
@@ -85,36 +90,36 @@ Entrepreneur cases route through **vera-niw-entrepreneur** before entering the s
 
 | # | Skill | What It Does |
 |---|-------|-------------|
-| 1 | `vera-niw-evaluate` | Reviews the petitioner's profile, maps available evidence to NIW requirements, identifies strengths, gaps, and risk areas, and produces a structured evidence-readiness summary |
-| 2 | `vera-niw-endeavor` | Drafts the national importance endeavor statement — the single paragraph USCIS reads first — using field-specific framing patterns |
-| 3 | `vera-niw-pillar` | Writes the three-pillar petition letter covering Prong 1 (substantial merit + national importance), Prong 2 (well-positioned), and Prong 3 (balance of equities). Run once per pillar |
-| 4 | `vera-niw-recommendation` | Generates recommendation letters with writer-specific voice calibration, ensuring each letter covers different evidence angles without redundancy |
-| 5 | `vera-niw-assemble` | Assembles a draft petition-support package — petition-letter draft, exhibit list, and supporting-document structure — as a review-ready .docx with cross-reference checks |
-| 6 | `vera-niw-pl-review` | Adversarial pre-filing review using denial-pattern checks mapped to public AAO reasoning patterns and common evidence weaknesses |
+| 1 | `vera-niw-evaluate` | Reviews the petitioner's profile, maps available evidence to NIW requirements, identifies strengths, gaps, and risk areas, and produces an evidence-readiness summary for human review |
+| 2 | `vera-niw-endeavor` | Drafts a proposed endeavor statement and related framing options based on the petitioner's field, evidence, and intended contribution, for human review and revision |
+| 3 | `vera-niw-pillar` | Drafts structured petition-letter sections for the three NIW prongs: substantial merit and national importance, well-positioned, and balance of equities. Designed for human review and revision |
+| 4 | `vera-niw-recommendation` | Drafts recommendation-letter support materials with recommender-specific framing, evidence mapping, and nonredundant emphasis areas for human review |
+| 5 | `vera-niw-assemble` | Assembles a review-ready petition-support package — petition-letter draft, exhibit list, and supporting-document structure — with cross-reference checks |
+| 6 | `vera-niw-pl-review` | Runs an adversarial pre-filing review using public AAO reasoning patterns and common evidence weaknesses to identify gaps, ambiguity, and potential RFE triggers |
 | 7 | `vera-niw-rfe-response` | Drafts a structured point-by-point RFE response framework that organizes each USCIS finding, relevant evidence, updated metrics, and potential new exhibits for human review |
-| 8 | `vera-niw-entrepreneur` | Evaluates and guides entrepreneur/founder NIW petitions using the USCIS Policy Manual's entrepreneur-specific framework (Jan 2025 update) |
+| 8 | `vera-niw-entrepreneur` | Reviews entrepreneur/founder NIW evidence using the USCIS Policy Manual's entrepreneur-specific framework and identifies evidence gaps, narrative risks, and documentation needs |
 
-> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) and [**stat-research-pipeline**](https://github.com/VeraSuperHub/stat-research-pipeline) — my other skill suites that take a research question and dataset to a publication-ready manuscript, end-to-end.
+> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags thin publications or citation impact, see [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) and [**stat-research-pipeline**](https://github.com/VeraSuperHub/stat-research-pipeline) — sister skill suites that structure the execution layer of an AI/statistical research workflow (diagnostics, candidate analyses, manuscript-section drafting, review checkpoints) for human-led research production.
 
 ### EB-1 ([`vera-eb1.plugin`](vera-eb1.plugin) / [`vera-eb1-skillset/`](vera-eb1-skillset/))
 
 | # | Skill | What It Does |
 |---|-------|-------------|
-| 1 | `vera-eb1-evaluate` | Reviews evidence for EB-1A and EB-1B pathways, maps materials to relevant criteria, and produces an evidence-readiness and gap summary |
-| 2 | `vera-eb1-authorship` | Criterion 6: authorship of scholarly articles with venue rankings and citation impact analysis |
-| 3 | `vera-eb1-original-contributions` | Criterion 5: original contributions of major significance with before/after framing |
-| 4 | `vera-eb1-judging` | Criterion 4: evidence of judging the work of others (peer review, panels, editorial boards) |
-| 5 | `vera-eb1-critical-role` | Criterion 8: leading or critical role in distinguished organizations |
-| 6 | `vera-eb1-published-material` | Criterion 3: published material about the petitioner in professional or major media |
-| 7 | `vera-eb1-recommendation` | Generates EB-1 reference letters from a recommender's perspective |
-| 8 | `vera-eb1-final-merits` | Kazarian Step 2: final-merits argument drafting support — organizes sustained-acclaim evidence, criteria-level outputs, impact signals, and narrative risks for human review |
-| 9 | `vera-eb1-assemble` | Assembles a review-ready EB-1 petition-letter draft as a formatted .docx |
-| 10 | `vera-eb1-pl-review` | Adversarial pre-filing review using the Kazarian two-step analytical framework |
-| 11 | `vera-eb1-rfe-response` | Drafts a structured EB-1 RFE response framework with evidence mapping and potential rebuttal patterns for human review |
+| 1 | `vera-eb1-evaluate` | Reviews evidence for EB-1A and EB-1B pathways, maps available materials to relevant criteria, identifies strengths, gaps, and risk areas, and produces an evidence-readiness summary for human review |
+| 2 | `vera-eb1-authorship` | Maps scholarly authorship evidence to the relevant EB-1 criterion, including publication venues, citation context, authorship role, and evidence gaps for human review |
+| 3 | `vera-eb1-original-contributions` | Drafts support for organizing original-contribution evidence, including contribution framing, adoption or impact signals, before/after context, and documentation gaps for human review |
+| 4 | `vera-eb1-judging` | Organizes judging evidence, such as peer review, panels, editorial service, and evaluation roles, and maps it to the relevant EB-1 criterion for human review |
+| 5 | `vera-eb1-critical-role` | Organizes evidence for leading or critical roles, including role context, organizational distinction, scope of responsibility, and impact documentation for human review |
+| 6 | `vera-eb1-published-material` | Organizes published-material evidence about the petitioner, including source credibility, media context, relevance, and documentation gaps for human review |
+| 7 | `vera-eb1-recommendation` | Drafts recommendation-letter support materials with recommender-specific framing, evidence mapping, and nonredundant emphasis areas for human review |
+| 8 | `vera-eb1-final-merits` | Drafts final-merits argument support by organizing sustained-acclaim evidence, criteria-level outputs, impact signals, and narrative risks for human review |
+| 9 | `vera-eb1-assemble` | Assembles a review-ready EB-1 petition-letter draft and supporting evidence structure as a formatted .docx |
+| 10 | `vera-eb1-pl-review` | Runs an adversarial pre-filing review using the Kazarian two-step framework, public AAO reasoning patterns, and common evidence weaknesses to identify gaps, ambiguity, and potential RFE triggers |
+| 11 | `vera-eb1-rfe-response` | Drafts a structured point-by-point EB-1 RFE response framework that organizes each USCIS finding, relevant evidence, updated metrics, and potential new exhibits for human review |
 
 **Total: 19 skills across both petition categories.**
 
-> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags insufficient publications or citation impact, I can help with that too. Check out [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) and [**stat-research-pipeline**](https://github.com/VeraSuperHub/stat-research-pipeline) — my other skill suites that take a research question and dataset to a publication-ready manuscript, end-to-end.
+> **Got a weak research profile?** If `vera-niw-evaluate` or `vera-eb1-evaluate` flags thin publications or citation impact, see [**ai-research-pipeline**](https://github.com/VeraSuperHub/ai-research-pipeline) and [**stat-research-pipeline**](https://github.com/VeraSuperHub/stat-research-pipeline) — sister skill suites that structure the execution layer of an AI/statistical research workflow (diagnostics, candidate analyses, manuscript-section drafting, review checkpoints) for human-led research production.
 
 ---
 
@@ -188,7 +193,7 @@ Or open `scholar_colab_demo.ipynb` in [Google Colab](https://colab.research.goog
 
 ### Recommended Workflow
 
-Start with **Evaluate** to get your evidence-readiness summary. If the readiness tier is STRONG_EVIDENCE or WORKABLE_EVIDENCE, proceed through the pipeline in order:
+Start with **Evaluate** to get your evidence-readiness summary — a structured map of strengths, gaps, and risk areas, intended for human review. If the readiness summary indicates the evidence base looks workable for review with an attorney, proceed through the pipeline in order:
 
 **NIW:**
 ```
@@ -202,7 +207,7 @@ Each skill's output is designed as input for the next skill in the pipeline. The
 Evaluate → Criterion Skills (select based on your evidence) → Recommendation (×N) + Final Merits → Assemble → PL Review
 ```
 
-The Evaluate skill determines EB-1A vs EB-1B and identifies which criteria your evidence supports. Run the relevant criterion skills, then generate recommendation letters and the final merits argument before assembling the petition.
+The Evaluate skill produces pathway framing (EB-1A vs EB-1B) and identifies which criteria your evidence appears to support — both as drafting inputs for human and attorney review. Run the relevant criterion skills, then generate recommendation-letter drafts and the final-merits argument support before assembling the petition draft.
 
 ---
 
@@ -231,17 +236,20 @@ Here's my endeavor statement and three pillar definitions from NIW_Endeavor:
 Write the petition content for Pillar 1.
 ```
 
-**PL Review — Adversarial quality check:**
+**PL Review — Adversarial pre-filing check:**
 ```
-Review my completed petition letter as a USCIS officer. Find every weakness
-that would trigger an RFE.
+Run a structured adversarial review of my completed petition letter using
+public AAO reasoning patterns and common evidence weaknesses. Surface every
+gap, ambiguity, or pattern that would commonly trigger an RFE.
 [paste petition letter]
 ```
 
-**RFE Response — Fight back:**
+**RFE Response — Drafting support:**
 ```
 I received this RFE on my NIW petition. Here's the RFE notice and my
-original petition letter. Generate a point-by-point response.
+original petition letter. Draft a structured point-by-point response
+framework that maps each USCIS finding to relevant evidence and potential
+new exhibits, for human and attorney review.
 [paste RFE notice]
 [paste original petition]
 ```
@@ -250,21 +258,21 @@ original petition letter. Generate a point-by-point response.
 
 ## How It Works
 
-Each skill encodes expert judgment as a structured decision process:
+Each skill encodes structured reasoning patterns as a decomposable workflow:
 
 ```
-Expert Knowledge (5,000+ AAO decisions)
+Public materials (USCIS Policy Manual, AAO decisions, policy guidance)
     ↓
-Decompose into decision rules & rubrics
+Decompose into evidence-organization rubrics & checklists
     ↓
-Encode as structured AI instructions (SKILL.md)
+Encode as structured Claude skill instructions (SKILL.md)
     ↓
 Add reference materials (rubrics, schemas, examples)
     ↓
 Validate against test cases (evals/)
 ```
 
-The key insight: many parts of evidence preparation are pattern-based. Public decisions, policy guidance, and real petition workflows reveal recurring structures: what evidence tends to be persuasive, where gaps commonly appear, how narratives are organized, and how weaknesses are stress-tested before filing. These repeatable components can be decomposed, encoded, validated, and improved by the community — while case-specific legal judgment remains a human professional responsibility.
+The key insight: many parts of evidence preparation are pattern-based. Public decisions, policy guidance, and petition workflows reveal recurring structures — what evidence tends to be persuasive, where gaps commonly appear, how narratives are organized, and how weaknesses are stress-tested before filing. These repeatable components can be decomposed, encoded, validated, and improved by the community — while case-specific legal judgment remains a human professional responsibility.
 
 ---
 
@@ -320,11 +328,11 @@ No. See [DISCLAIMER.md](DISCLAIMER.md). These tools provide informational guidan
 **Do I need to be technical?**
 No. If you can use Claude, you can use these skills. Copy, paste, follow the prompts.
 
-**Will this guarantee my NIW approval?**
-No tool or attorney can guarantee approval. These skills help you identify weaknesses and build a stronger petition before filing.
+**Will this assess my approval chances?**
+No. These skills do not predict or assess approval likelihood — that is a case-specific legal judgment that belongs to a qualified immigration attorney. The skills help you identify evidence gaps, organize exhibits, draft review-ready petition sections, and stress-test a petition before filing.
 
 **How is this different from ChatGPT prompts for NIW?**
-Generic prompts produce generic output. Each skill here encodes hundreds of specific decision rules — failure pattern detection, field-specific framing, USCIS-language calibration — derived from systematic analysis of AAO decisions. The difference is the same as between a generic prompt and a structured workflow: the skills include explicit rubrics, schemas, failure-pattern checks, and evidence-mapping steps that make the output easier to review, test, and improve.
+Generic prompts produce generic output. Each skill here encodes structured reasoning patterns — evidence-organization rubrics, common-weakness checks, field-specific framing, USCIS-language conventions — derived from public AAO decisions and the USCIS Policy Manual. The skills include explicit rubrics, schemas, failure-pattern checks, and evidence-mapping steps that make the output easier to review, test, and improve. They are drafting and review-support tools, not legal decision tools.
 
 **Can I use this with GPT-4 or other models?**
 The skills are optimized for Claude but the instructions are model-agnostic text. They may work with other capable models, though output quality may vary.
