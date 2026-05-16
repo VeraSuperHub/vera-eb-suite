@@ -1,18 +1,18 @@
 # Vera EB Suite
 
-> Hi, I'm **Vera** — a silicon-based rabbit who documents the open-source Claude skills Veronica created.
+> Hi, I'm **Vera** — a silicon-based rabbit who documents the open-source skills Veronica created.
 >
 > Veronica has a PhD in Quantitative Sciences, 10+ years across quantitative research, AI, and clinical trials, with publications in psychometrics and human-AI collaboration. She also went through the NIW process herself. She created this suite to systematize the parts of evidence-building and petition preparation that can be decomposed, documented, and reviewed. I help structure the workflows. She reviews, tests, and decides what ships.
 >
 > Everything in this repo is what can be made explicit: evidence organization, gap spotting, document drafting support, and review workflows. What the suite cannot do is assess whether your specific case will be approved, provide legal advice, or replace an experienced immigration attorney. That remains a human and legal judgment.
 
-**Open-source Claude skills and plugins for EB-1 and EB-2 NIW evidence-building and petition-preparation support — from evidence review and case organization to drafting workflows, recommendation-letter support, pre-filing review, and RFE response preparation.**
+**Open-source Claude Code and Codex-compatible skills for EB-1 and EB-2 NIW evidence-building and petition-preparation support — from evidence review and case organization to drafting workflows, recommendation-letter support, pre-filing review, and RFE response preparation.**
 
-Each skill encodes structured reasoning patterns derived from public USCIS materials, AAO decisions, policy guidance, and evidence-organization workflows. Built for [Claude](https://claude.ai).
+Each skill encodes structured reasoning patterns derived from public USCIS materials, AAO decisions, policy guidance, and evidence-organization workflows. The repo ships Claude Code plugin bundles plus plain `SKILL.md` folders inside `.skill` archives that can also be installed into Codex.
 
 > _Across [VeraSuperHub](https://github.com/VeraSuperHub), Vera structures execution; humans own judgment._
 
-> **Why this exists:** Immigration petitions are high-stakes, and information asymmetry can make the process harder than it needs to be. Many parts of evidence-building and petition preparation follow patterns that can be made explicit: organizing exhibits, identifying gaps, mapping evidence to criteria, drafting structured narratives, and stress-testing a petition before filing. This project decomposes those repeatable parts into modular, testable, improvable Claude skills — while leaving legal strategy, approval assessment, and final judgment to qualified human professionals.
+> **Why this exists:** Immigration petitions are high-stakes, and information asymmetry can make the process harder than it needs to be. Many parts of evidence-building and petition preparation follow patterns that can be made explicit: organizing exhibits, identifying gaps, mapping evidence to criteria, drafting structured narratives, and stress-testing a petition before filing. This project decomposes those repeatable parts into modular, testable, improvable skills — while leaving legal strategy, approval assessment, and final judgment to qualified human professionals.
 
 ---
 
@@ -137,12 +137,12 @@ In addition to skills, this suite includes standalone tools that feed data into 
 
 ### Requirements
 
-- [Claude Pro, Max, Team, or Enterprise](https://claude.ai/upgrade) subscription
-- Code execution enabled (Settings → Capabilities)
+- Claude Code, claude.ai with Skills enabled, or Codex with local skills support
+- Code execution enabled when using tools that require it
 
 ### Installation
 
-There are two ways to install: **plugins** (for Claude Code) and **individual skills** (for claude.ai).
+There are three ways to install: **plugins** for Claude Code, **individual `.skill` uploads** for claude.ai, and **extracted skill folders** for Codex.
 
 #### Option A — Plugin (Claude Code / CLI)
 
@@ -178,6 +178,20 @@ For use on [claude.ai](https://claude.ai), install skills one at a time:
 Claude will automatically invoke the skill when your request matches its description — no manual activation needed.
 
 **Install one skill at a time.** For the full NIW pipeline, install all 8. For EB-1, install all 11.
+
+#### Option C — Individual Skills (Codex)
+
+For Codex, each `.skill` file is a zip archive containing a standard skill folder with `SKILL.md` plus its supporting `references/`, `docs/`, `evals/`, and schemas. Extract the archives into your Codex skills directory:
+
+```bash
+# Install all petition skills into the default Codex skills directory
+mkdir -p ~/.codex/skills
+for f in vera-niw-skillset/*.skill vera-eb1-skillset/*.skill; do
+  unzip -oq "$f" -d ~/.codex/skills
+done
+```
+
+After extraction, Codex can discover the skills from `~/.codex/skills/<skill-name>/SKILL.md`.
 
 ### Google Scholar Tool Setup
 
@@ -265,7 +279,7 @@ Public materials (USCIS Policy Manual, AAO decisions, policy guidance)
     ↓
 Decompose into evidence-organization rubrics & checklists
     ↓
-Encode as structured Claude skill instructions (SKILL.md)
+Encode as structured skill instructions (SKILL.md)
     ↓
 Add reference materials (rubrics, schemas, examples)
     ↓
@@ -326,7 +340,7 @@ vera-eb-suite/
 No. See [DISCLAIMER.md](DISCLAIMER.md). These tools provide informational guidance only. Always consult a qualified immigration attorney for your specific case.
 
 **Do I need to be technical?**
-No. If you can use Claude, you can use these skills. Copy, paste, follow the prompts.
+No. Claude users can install plugins or upload `.skill` files. Codex users can extract the same `.skill` archives into their local skills directory.
 
 **Will this assess my approval chances?**
 No. These skills do not predict or assess approval likelihood — that is a case-specific legal judgment that belongs to a qualified immigration attorney. The skills help you identify evidence gaps, organize exhibits, draft review-ready petition sections, and stress-test a petition before filing.
@@ -334,8 +348,8 @@ No. These skills do not predict or assess approval likelihood — that is a case
 **How is this different from ChatGPT prompts for NIW?**
 Generic prompts produce generic output. Each skill here encodes structured reasoning patterns — evidence-organization rubrics, common-weakness checks, field-specific framing, USCIS-language conventions — derived from public AAO decisions and the USCIS Policy Manual. The skills include explicit rubrics, schemas, failure-pattern checks, and evidence-mapping steps that make the output easier to review, test, and improve. They are drafting and review-support tools, not legal decision tools.
 
-**Can I use this with GPT-4 or other models?**
-The skills are optimized for Claude but the instructions are model-agnostic text. They may work with other capable models, though output quality may vary.
+**Can I use this with Codex, GPT-4, or other models?**
+Yes. The skills are structured as model-agnostic `SKILL.md` instruction folders. Claude-specific plugin files are provided for Claude Code, while Codex can use the extracted skill folders directly. Output quality may vary by model and context window.
 
 **Can I contribute?**
 Yes. See [CONTRIBUTING.md](CONTRIBUTING.md).

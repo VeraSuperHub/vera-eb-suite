@@ -2,6 +2,20 @@
 
 All notable changes to the Vera EB Suite (EB-1 + EB-2 NIW skills) will be documented in this file.
 
+## [2.1.0] - 2026-05-16
+
+### Added
+- Strategic Navigation 2026 references for both NIW and EB-1 skill families, distilled from the `Strategic Navigation of EB2 NIW and EB1A Immigration Trends` notebook and constrained to filing-facing use through USCIS/legal source discipline.
+- Codex installation guidance for extracting `.skill` archives into local `SKILL.md` folders.
+
+### Changed
+- Updated NIW and EB-1 skills to emphasize officer-friendly evidence navigation, document-dump prevention, NIW ripple-effect chains, EB-1 final-merits synthesis, independent recognition, and RFE response triage.
+- Rebuilt all `.skill` archives as self-contained packages with shared references and family docs included inside each skill folder.
+- Updated public docs from Claude-only framing to Claude Code and Codex-compatible skill usage.
+
+### Fixed
+- Corrected several stale relative-reference paths in source and packaged skill files.
+
 ## [2.0.0] - 2026-03-08
 
 ### Added

@@ -18,7 +18,7 @@ Workflow patterns decompose into three layers:
 
 ## The Method
 
-A skill encodes all three layers into a structured Claude instruction set:
+A skill encodes all three layers into a structured instruction set:
 
 ### Step 1: Decompose
 

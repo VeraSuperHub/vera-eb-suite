@@ -55,11 +55,11 @@ vera-niw-{name}/
 └── examples/         # (optional) Example outputs
 ```
 
-The `SKILL.md` file is what Claude executes. Everything else supports it.
+The `SKILL.md` file is what the assistant executes. Everything else supports it.
 
 ## Guidelines
 
-- **Keep skills standalone.** Each skill folder should work independently when uploaded as a ZIP to Claude. Don't create cross-skill dependencies on shared files.
+- **Keep skills standalone.** Each skill folder should work independently when uploaded as a ZIP to Claude or extracted into Codex. Don't create cross-skill dependencies on shared files.
 - **Be conservative.** Immigration is high-stakes. When in doubt, flag a weakness rather than miss it. A false positive costs the petitioner time; a false negative costs them their case.
 - **Cite sources.** Reference specific AAO decisions, USCIS Policy Manual sections, or adjudication data when adding new patterns or rules.
 - **Test your changes.** Run the skill against the existing eval cases and add new ones for your changes.
