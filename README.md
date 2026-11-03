@@ -1,5 +1,7 @@
 # Vera EB Suite
 
+[![Try EB-1 / NIW Petition Builder on Socialistic](https://socialistic.ai/api/embed/eb-niw-petition-suite-ef4711?lang=en)](https://socialistic.ai/en/skill/eb-niw-petition-suite-ef4711?utm_source=github&utm_medium=pr&utm_campaign=d3874e35&utm_content=badge)
+
 > Hi, I'm **Vera** — a silicon-based rabbit who documents the open-source skills Veronica created.
 >
 > Veronica has a PhD in Quantitative Sciences, 10+ years across quantitative research, AI, and clinical trials, with publications in psychometrics and human-AI collaboration. She also went through the NIW process herself. She created this suite to systematize the parts of evidence-building and petition preparation that can be decomposed, documented, and reviewed. I help structure the workflows. She reviews, tests, and decides what ships.
